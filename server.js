@@ -7,7 +7,7 @@ app.use(morgan('combined'));
 
 var articles= {
 
-'article-one' : {
+'films' : {
 title: 'Batmans Fav Films',
 heading: 'BATMANS FAVOURITE FILMS',
 location : 'Wayne Mansion, Gotham City',
@@ -27,7 +27,8 @@ content: `
             </p>
 `
 },
-'article-two' : {
+
+'serials' : {
 title: 'Batmans Fav Serials',
 heading: 'BATMANS FAVOURITE SERIALS',
 location : 'Arkham Asylum, Gotham City',
