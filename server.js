@@ -5,6 +5,33 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var films = {
+title: 'Batmans Fav Films',
+heading: 'BATMANS FAVOURITE FILMS',
+location : 'Wayne Mansion, Gotham City',
+content: `
+<p> 
+            <ul>
+                <li> The Shawshank Redemption</li>
+                <li> Forrest Gump</li>
+                <li> The Godfather trilogy</li>
+                <li> The Batman trilogy</li>
+                <li> Memento</li>
+                <li> The Prestige</li>
+                <li> Fight Club</li>
+                <li> Se7en</li>
+            
+            </ul>
+            </p>
+'};
+
+var
+
+
+
+
+
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
