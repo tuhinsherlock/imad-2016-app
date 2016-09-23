@@ -5,7 +5,8 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var films = {
+var stuff = {
+films = {
 title: 'Batmans Fav Films',
 heading: 'BATMANS FAVOURITE FILMS',
 location : 'Wayne Mansion, Gotham City',
@@ -24,6 +25,27 @@ content: `
             </ul>
             </p>
 `
+},
+serials = {
+title: 'Batmans Fav Serials',
+heading: 'BATMANS FAVOURITE SERIALS',
+location : 'Arkham Asylum, Gotham City',
+content: `
+ <p> 
+        <ul>
+            <li> Mr. Robot</li>
+            <li> Game of Thrones</li>
+            <li> Friends</li>
+            <li> Seinfeld</li>
+            <li> House of Cards</li>
+            <li> Narcos</li>
+            <li> Sherlock</li>
+            <li> Stranger Things</li>
+            
+        </ul>
+        </p>
+        `
+}
 };
 
 function createTemplate(data) {
@@ -72,7 +94,7 @@ app.get('/films', function (req, res) {
 })
 
 app.get('/serials', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'serials.html'));
+  res.send(createTemplate());
 })
 
 app.get('/article-three', function (req, res) {
