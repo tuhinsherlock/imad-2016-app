@@ -29,7 +29,7 @@ app.get('/ui/style.css', function (req, res) {
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
-app.get('/ui/madi.png', function (req, res) {
+app.get('/ui/Batman.gif', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'Batman.gif'));
 });
 
