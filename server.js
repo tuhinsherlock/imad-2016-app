@@ -26,7 +26,30 @@ content: `
 `
 };
 
-var 
+var htmlTemplate = `
+<html>
+    <head>
+      <title>${title}</title>
+      <link href="/ui/style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class = "container">
+            <div>
+                <a href="/"> Home</a>
+            </div>
+            <div>
+                ${location}
+            </div>
+            <div class = "header">
+            <h1> ${heading} </h1>
+            </div>
+            <div class = "list">
+            ${content}
+            </div> 
+        </div>
+    </body>
+</html>
+`
 
 
 
