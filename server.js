@@ -5,8 +5,7 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var stuff = {
-films = {
+var films= {
 title: 'Batmans Fav Films',
 heading: 'BATMANS FAVOURITE FILMS',
 location : 'Wayne Mansion, Gotham City',
@@ -25,7 +24,7 @@ content: `
             </ul>
             </p>
 `
-},
+/*},
 serials = {
 title: 'Batmans Fav Serials',
 heading: 'BATMANS FAVOURITE SERIALS',
@@ -45,7 +44,7 @@ content: `
         </ul>
         </p>
         `
-}
+}*/
 };
 
 function createTemplate(data) {
