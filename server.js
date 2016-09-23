@@ -89,7 +89,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/films', function (req, res) {
-  res.send(createTemplate(stuff[films]));
+  res.send(createTemplate(films));
 })
 
 app.get('/serials', function (req, res) {
