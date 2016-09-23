@@ -5,7 +5,7 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articles= {
+var stuff= {
 
 'films' : {
 title: 'Batmans Fav Films',
@@ -89,7 +89,7 @@ app.get('/', function (req, res) {
 
 app.get('/:articleName', function (req, res) {
 var articleName = req.params.articleName;
-  res.send(createTemplate(articles[articleName]));
+  res.send(createTemplate(stuff[articleName]));
 })
 
 app.get('/ui/style.css', function (req, res) {
