@@ -7,9 +7,9 @@ app.use(morgan('combined'));
 
 var articles= {
 
-'article-one' = {
+'article-one' : {
 title: 'Article One',
-heading: 'BATMANS FAVOURITE FILMS',
+heading: 'Article Two',
 location : 'Wayne Mansion, Gotham City',
 content: `
 <p> 
@@ -27,9 +27,9 @@ content: `
             </p>
 `
 },
-'article-two' = {
+'article-two' : {
 title: 'Article Two',
-heading: 'BATMANS FAVOURITE SERIALS',
+heading: 'Article Two',
 location : 'Arkham Asylum, Gotham City',
 content: `
  <p> 
