@@ -8,7 +8,7 @@ app.use(morgan('combined'));
 var articles= {
 
 'article-one' : {
-title: 'Batmans Fav Films,
+title: 'Batmans Fav Films',
 heading: 'BATMANS FAVOURITE FILMS',
 location : 'Wayne Mansion, Gotham City',
 content: `
