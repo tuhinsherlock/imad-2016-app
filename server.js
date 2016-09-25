@@ -6,7 +6,6 @@ var app = express();
 app.use(morgan('combined'));
 
 var stuff= {
-
 'films' : {
 title: 'Batmans Fav Films',
 heading: 'BATMANS FAVOURITE FILMS',
@@ -27,7 +26,6 @@ content: `
             </p>
 `
 },
-
 'serials' : {
 title: 'Batmans Fav Serials',
 heading: 'BATMANS FAVOURITE SERIALS',
@@ -98,6 +96,10 @@ app.get('/ui/style.css', function (req, res) {
 
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
+});
+
+app.get('/ui/main.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
 
 app.get('/ui/Batman.gif', function (req, res) {
