@@ -18,6 +18,7 @@ body {
 
 .img-medium {
     height: 300px;
+    margin-left : 100px;
 }
  .container{
         font-family: sans-serif;
