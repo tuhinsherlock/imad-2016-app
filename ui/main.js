@@ -22,7 +22,7 @@ button.onclick = function() {
 };
 
 var name = document.getElementById('name').value;
-var submit = document.getElementById('submit');
+var submit = document.getElementById('submit_btn');
 submit.onclick= function(){
     
     var names=["name1","name2","name3","name4"];
