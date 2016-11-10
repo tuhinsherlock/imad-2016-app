@@ -1,12 +1,6 @@
-body {
-    font-family: sans-serif;
-    background-color: white;
-    margin-top: 75px;
-    margin-left : 50px;
-}
 
 .row {
-    padding: 20px;
+    padding: 40px;
 }
 .nav a {
   color: #5a5a5a;
