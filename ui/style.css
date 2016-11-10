@@ -16,7 +16,7 @@
 
 .jumbotron {
   background-image: url('http://files.fbcoverstreet.com/content/1uz5AmgBa14Nqvg9XT2EO5xiI73DYgNt2Y9C6zfFhPGMpInpLcr9aOE57QvDtcl3.jpg');
-  height: 315px;
+  height: 350px;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -58,11 +58,27 @@
     margin-left : 50px;
     width: 100px;
 }
+
+.learn-more {
+    color: #e24216;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.learn-mor {
+  background-color: #f7f7f7;
+}
+
+.learn-mor h3 {
+  font-family: 'Shift', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
  .container{
         font-family: sans-serif;
         margin: 0 auto;
         max-width: 800px;
-        color: #062e8c;
+        color: ;
         padding-top: 60px;
         padding-left: 20px;
         padding-right: 20px;
