@@ -5,6 +5,9 @@ body {
     margin-left : 50px;
 }
 
+.row {
+    padding: 20px;
+}
 .nav a {
   color: #5a5a5a;
   font-size: 11px;
