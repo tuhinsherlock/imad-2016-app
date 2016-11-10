@@ -60,8 +60,12 @@
     width: 100px;
 }
 
+.learn-more 
+{
+    color: #e24216;
+}
 .learn-mor {
-color: #e24216;
+color:#06ad36 ;
   font-size: 18px;
   font-weight: bold;
 }
