@@ -20,7 +20,8 @@
 
 .jumbotron h1 {
   color: #fff;
-  font-size: 48px;  
+  font-size: 48px; 
+  background-image: url('http://files.fbcoverstreet.com/content/Xaclon4AcRnhURLOuOD84vB7qONAFkzOeDZSRQwCOd5Ebulisy8fisylYf4aa452.jpg');
   font-family: 'Shift', sans-serif;
   font-weight: bold;
 }
