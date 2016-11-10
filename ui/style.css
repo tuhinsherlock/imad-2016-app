@@ -17,6 +17,11 @@ body {
   display: inline;
 }
 
+.jumbotron p {
+  font-size: 20px;
+  color: #fff;
+}
+
 .center {
     text-align: center;
 }
