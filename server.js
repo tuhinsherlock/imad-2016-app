@@ -130,7 +130,7 @@ app.get('/ui/batlogo.gif', function (req, res) {
 });
 
 app.get('/ui/bootstrap.css', function (req, res) {
-  res.send(path.join(__dirname, 'ui', 'bootstrap.css'));
+  res.sendFile(path.join(__dirname, 'ui', 'bootstrap.css'));
 });
 
 
