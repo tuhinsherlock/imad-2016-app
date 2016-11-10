@@ -1,6 +1,7 @@
 
 .row {
     padding: 40px;
+    margin-left: 30px;
 }
 .nav a {
   color: #5a5a5a;
@@ -60,7 +61,7 @@
 }
 
 .learn-mor {
-    color: #e24216;
+color: #e24216;
   font-size: 18px;
   font-weight: bold;
 }
@@ -74,7 +75,7 @@
   font-size: 18px;
   font-weight: bold;
 }
- .contain{
+ .container{
         font-family: sans-serif;
         margin: 0 auto;
         max-width: 800px;
