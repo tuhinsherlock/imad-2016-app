@@ -47,6 +47,9 @@ var req = http.request(options, function (res) {
   });
 });
 
+req.write("{}");
+req.end();
+
 app.get('/:articleName', function (req, res) {
 var articleName = req.params.articleName;
   res.send(createTemplate(stuff[articleName]));
