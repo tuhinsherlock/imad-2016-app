@@ -5,80 +5,12 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var stuff= {
-'films' : {
-title: 'Batmans Fav Films',
-heading: 'BATMANS FAVOURITE FILMS',
-location : 'Wayne Mansion, Gotham City hello fuck',
-content: `
-<p> 
-            <ul>
-                <li> The Shawshank Redemption</li>
-                <li> Forrest Gump</li>
-                <li> The Godfather trilogy</li>
-                <li> The Batman trilogy</li>
-                <li> Memento</li>
-                <li> The Prestige</li>
-                <li> Fight Club</li>
-                <li> Se7en</li>
-            
-            </ul>
-            </p>
-`
-},
-'serials' : {
-title: 'Batmans Fav Serials',
-heading: 'BATMANS FAVOURITE SERIALS',
-location : 'Arkham Asylum, Gotham City',
-content: `
- <p> 
-        <ul>
-            <li> Mr. Robot</li>
-            <li> Game of Thrones</li>
-            <li> Friends</li>
-            <li> Seinfeld</li>
-            <li> House of Cards</li>
-            <li> Narcos</li>
-            <li> Sherlock</li>
-            <li> Stranger Things</li>
-            
-        </ul>
-        </p>
-        `
-}
-};
 
 function createTemplate(data) {
     var title = data.title;
     var heading = data.heading;
     var location = data.location;
     var content = data.content;
-    
-var htmlTemplate = `
-<html>
-    <head>
-      <title>${title}</title>
-      <link href="/ui/style.css" rel="stylesheet" />
-    </head>
-    <body>
-        <div class = "container">
-            <div>
-                <a href="/"> Home</a>
-            </div>
-            <div>
-                ${location}
-            </div>
-            <div class = "header">
-            <h1> ${heading} </h1>
-            </div>
-            <div class = "list">
-            ${content}
-            </div> 
-        </div>
-    </body>
-</html>
-`;
-return htmlTemplate;
 }
 
 app.get('/', function (req, res) {
@@ -92,12 +24,26 @@ app.get('/counter', function (req, res) {
   res.send(counter.toString());
 });
 
-var names=[];
+app.get('/search-movie',function(req,res){
+	
+	var name = req.query.moviename;
+	var data = "{}";
+	name = name.replace(/ /g, "%20");
 
-app.get('/submit-name/', function(req,res){
-    var name = req.query.name;
-    names.push(name);
-    res.send(JSON.stringify(names));
+	var xhr = new XMLHttpRequest();
+	xhr.withCredentials = true;
+
+	xhr.addEventListener("readystatechange", function () {
+  		if (this.readyState === this.DONE) {
+    		console.log(this.responseText);
+  		}
+	});
+
+	xhr.open("GET", "https://api.themoviedb.org/3/search/movie?query="+name+"&api_key=9c6f4edf8b2c52678bf8e0885ff611d9");
+
+xhr.send(data);
+console.log(data);
+
 });
 
 app.get('/:articleName', function (req, res) {
