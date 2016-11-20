@@ -24,26 +24,27 @@ app.get('/counter', function (req, res) {
   res.send(counter.toString());
 });
 
-app.get('/search-movie',function(req,res){
-	
-	var name = req.query.moviename;
-	var data = "{}";
-	name = name.replace(/ /g, "%20");
+var http = require("https");
 
-	var xhr = new XMLHttpRequest();
-	xhr.withCredentials = true;
+var options = {
+  "method": "GET",
+  "hostname": "api.themoviedb.org",
+  "port": null,
+  "path": "/3/search/movie?language=en-US&api_key=9c6f4edf8b2c52678bf8e0885ff611d9",
+  "headers": {}
+};
 
-	xhr.addEventListener("readystatechange", function () {
-  		if (this.readyState === this.DONE) {
-    		console.log(this.responseText);
-  		}
-	});
+var req = http.request(options, function (res) {
+  var chunks = [];
 
-	xhr.open("GET", "https://api.themoviedb.org/3/search/movie?query="+name+"&api_key=9c6f4edf8b2c52678bf8e0885ff611d9");
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
 
-xhr.send(data);
-console.log(data);
-
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
 });
 
 app.get('/:articleName', function (req, res) {
