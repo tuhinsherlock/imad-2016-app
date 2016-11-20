@@ -26,30 +26,22 @@ app.get('/counter', function (req, res) {
 
 var http = require("https");
 
-var options = {
-  "method": "GET",
-  "hostname": "api.themoviedb.org",
-  "port": null,
-  "path": "/3/search/movie?language=en-US&api_key=9c6f4edf8b2c52678bf8e0885ff611d9",
-  "headers": {}
-};
+var request = require("request");
 
-var req = http.request(options, function (res) {
-  var chunks = [];
+var options = { method: 'GET',
+  url: 'https://api.themoviedb.org/3/search/movie',
+  qs: 
+   { query: 'La La Land',
+     language: 'en-US',
+     api_key: '9c6f4edf8b2c52678bf8e0885ff611d9' },
+  body: '{}' };
 
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
 
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
-});
-
-req.write("{}");
-req.end();
-
+  console.log(body);
+}); 
+   
 app.get('/:articleName', function (req, res) {
 var articleName = req.params.articleName;
   res.send(createTemplate(stuff[articleName]));
