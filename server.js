@@ -37,7 +37,7 @@ var tmdbconfigreq = http.request({
     "method": "GET",
     "hostname": "api.themoviedb.org",
     "port": null,
-    "path": "/3/tmdbconfiguration?api_key="+api_key,
+    "path": "/3/configuration?api_key="+api_key,
     "headers": {} }, function (res) {
   var chunks = [];
 
