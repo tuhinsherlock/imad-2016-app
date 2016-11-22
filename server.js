@@ -70,7 +70,6 @@ app.get('/search-movie', function(req, res){
 
 app.get('/write-review', function(req, res){
     var id = req.query.movie_id;
-    id = 6352;
     console.log("write-review id="+id);
     
     var req1 = http.request(getMovieDetailsOptions(id), function(res1){
