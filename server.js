@@ -5,6 +5,7 @@ var Pool = require('pg').Pool;
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var http = require('https');
 
 var pgdbconfig = {
     user: 'tuhinsherlock',
@@ -246,6 +247,10 @@ app.get('/logout', function (req, res) {
 
 app.get('/browse', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'browse.html'));
+});
+
+app.get('/', function(req, res){
+  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
 app.get('/write-review', function(req, res){
