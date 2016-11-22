@@ -1,12 +1,39 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-var http = require("https");
+var http = require('https');
+var bodyParser=require('body-parser');
 
 var app = express();
 app.use(morgan('combined'));
+var config;
 
-var api_key = "9c6f4edf8b2c52678bf8e0885ff611d9";
+app.use(bodyParser.json());
+
+var api_key = '9c6f4edf8b2c52678bf8e0885ff611d9';
+
+var configreq = http.request({
+    "method": "GET",
+    "hostname": "api.themoviedb.org",
+    "port": null,
+    "path": "/3/configuration?api_key="+api_key,
+    "headers": {} }, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    body = JSON.parse(body);
+    config = body;
+    console.log('Config ---> '+JSON.stringify(body));
+  });
+});
+
+configreq.write("{}");
+configreq.end();
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
@@ -49,7 +76,7 @@ app.get('/search-movie', function(req, res){
         
         res1.on("end", function(){
             var body = Buffer.concat(chunks);
-	    body = JSON.parse(body);
+	           body = JSON.parse(body);
             console.log(body.toString());
           
             if(res1.statusCode==200){
@@ -63,14 +90,26 @@ app.get('/search-movie', function(req, res){
             }
         });
     });
-//
+
     req1.write("{}");
     req1.end();
 });
 
+app.post('/submit-review', function(req,res) {
+    console.log(req.body);
+  var body = req.body;
+  var reviewcon = body.reviewcon;
+  console.log(reviewcon);
+});
+
 app.get('/write-review', function(req, res){
+  res.sendFile(path.join(__dirname, 'ui', 'write-review.html'));
+});
+
+app.get('/get-movie-details', function(req, res){
     var id = req.query.movie_id;
-    console.log("write-review id="+id);
+
+    console.log("get-movie-details id="+id);
     
     var req1 = http.request(getMovieDetailsOptions(id), function(res1){
         var chunks = [];
@@ -81,10 +120,18 @@ app.get('/write-review', function(req, res){
         
         res1.on("end", function(){
             var body = Buffer.concat(chunks);
-            console.log(body.toString());
+            body = JSON.parse(body);
+            console.log(JSON.stringify(body));
             
             if(res1.statusCode==200){
-                res.send("Send an HTML template with filled movie details");
+                var movie_details = {
+                    movie_name : body.title,
+                    poster_path : config['images']['base_url']+config['images']['poster_sizes'][0]+body.poster_path,
+                    release_date : body.release_date,
+                    overview : body.overview
+                }
+                console.log('Returning ----> '+JSON.stringify(movie_details));
+                res.send(JSON.stringify(movie_details));
             }
             else{
                 console.log("ERROR status "+res1.statusCode);
@@ -94,6 +141,10 @@ app.get('/write-review', function(req, res){
     });
     req1.write("{}");
     req1.end();
+});
+
+app.get('/write-review.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'write-review.js'));
 });
 
 app.get('/ui/style.css', function (req, res) {
