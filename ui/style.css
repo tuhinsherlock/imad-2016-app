@@ -1,4 +1,22 @@
-/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600);*/
+#bg {
+  position: fixed; 
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
+}
+#bg img {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto; 
+  min-width: 50%;
+  min-height: 50%;
+}
+
+/*@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600);
 
 html { 
   background: url('http://thesmashable.com/wp-content/uploads/2012/07/the_dark_knight_rises_hd_wallpapers_1920x1020_desktop_backgrounds_latest.jpg') no-repeat center center fixed; 
@@ -8,7 +26,7 @@ html {
   background-size: cover;
 }
 
-/* * {
+* {
 	margin:0;
 	padding:0;
 	box-sizing:border-box;
