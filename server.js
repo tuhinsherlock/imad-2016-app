@@ -266,7 +266,7 @@ app.get('/ui/write-review.js', function (req, res) {
 });
 
 app.get('/ui/register.js', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'write-review.js'));
+  res.sendFile(path.join(__dirname, 'ui', 'register.js'));
 });
 
 app.get('/ui/style.css', function (req, res) {
@@ -274,7 +274,7 @@ app.get('/ui/style.css', function (req, res) {
 });
 
 app.get('/ui/registerstyle.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'style.css'));
+  res.sendFile(path.join(__dirname, 'ui', 'registerstyle.css'));
 });
 
 app.get('/ui/main.js', function (req, res) {
