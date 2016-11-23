@@ -269,8 +269,8 @@ app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
 
-app.get('/ui/Batman.gif', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'Batman.gif'));
+app.get('/ui/Sherlock.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'Sherlock.jpg'));
 });
 
 
