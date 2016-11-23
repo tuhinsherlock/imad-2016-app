@@ -74,12 +74,12 @@ fieldset {
 	border:1px solid #AAA;
 }
 
-#register button[type="submit"] {
+#register input[type="submit"] {
 	cursor:pointer;
 	width:100%;
 	border:none;
 	background:#0CF;
-	color:#FFF;
+	color:#FFFFFF;
 	margin:0 0 5px;
 	padding:10px;
 	font-size:15px;
