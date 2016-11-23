@@ -43,12 +43,15 @@ body {
 	display: block;
 	font-size: 30px;
 	font-weight: 400;
+	font-weight: bold;
+	text-align: center;
 }
 
 #register h4 {
 	margin:5px 0 15px;
 	display:block;
 	font-size:13px;
+	text-align: center;
 }
 
 fieldset {
