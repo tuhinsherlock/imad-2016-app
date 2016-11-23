@@ -11,7 +11,7 @@ function loadLoginForm () {
           if (request.readyState === XMLHttpRequest.DONE) {
               // Take some action
               if (request.status === 200) {
-                  submit.value = 'Sucess!';
+                  submit.value = 'Success!';
               } else if (request.status === 403) {
                   submit.value = 'Invalid credentials. Try again?';
               } else if (request.status === 500) {
@@ -39,6 +39,12 @@ function loadLoginForm () {
     };
     
     var register = document.getElementById('register_btn');
+    
+    register.onclick = function() {
+        window.location.href = "/register";
+    };
+    
+    /*var register = document.getElementById('register_btn');
     register.onclick = function () {
         // Create a request object
         var request = new XMLHttpRequest();
@@ -67,7 +73,7 @@ function loadLoginForm () {
         request.send(JSON.stringify({username: username, password: password}));  
         register.value = 'Registering...';
     
-    };
+    };*/
 }
 
 function loadLoggedInUser (username) {
