@@ -15,8 +15,9 @@ html {
 }
 
 html { 
-  /*background: url('http://cdn.pcwallart.com/images/interstellar-poster-wallpaper-1.jpg') no-repeat center center fixed; 
-  background: url('https://isracalzadolopez.files.wordpress.com/2014/11/interstellar.jpeg') no-repeat center center fixed; */
+  background: url('http://cdn.pcwallart.com/images/interstellar-poster-wallpaper-1.jpg') no-repeat center center fixed; 
+  /*background: url('https://isracalzadolopez.files.wordpress.com/2014/11/interstellar.jpeg') no-repeat center center fixed; */
+  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
