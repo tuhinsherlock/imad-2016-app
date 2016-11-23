@@ -124,7 +124,6 @@ app.post('/submit-review', function(req,res) {
 });
 
 
-
 app.get('/get-movie-details', function(req, res){
 
     var id = req.query.movie_id;
