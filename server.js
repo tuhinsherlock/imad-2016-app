@@ -260,9 +260,6 @@ app.get('/write-review', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'write-review.html'));
 });
 
-app.get('/ui/write-review.js', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'write-review.js'));
-});
 
 app.get('/ui/register.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'register.js'));
@@ -282,6 +279,11 @@ app.get('/ui/main.js', function (req, res) {
 
 app.get('/ui/Sherlock.jpg', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'Sherlock.jpg'));
+});
+
+app.get('/ui/write-review.js', function (req, res) {
+  res.set('Content-Type', 'text/javascript');
+  res.sendFile(path.join(__dirname, 'ui', 'write-review.js'));
 });
 
 
