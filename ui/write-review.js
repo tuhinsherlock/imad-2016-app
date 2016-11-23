@@ -19,6 +19,8 @@ request1.onreadystatechange = function(){
 			year.innerHTML = response["release_date"];
 			desc.innerHTML = response["overview"];
 		}
+		else
+		console.log("Error");
 	}
 };
 
