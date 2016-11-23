@@ -20,7 +20,7 @@ request1.onreadystatechange = function(){
 			desc.innerHTML = response["overview"];
 		}
 	}
-}
+};
 
 request1.open('GET','/get-movie-details?movie_id='+movie_id);
 request1.send('{}');
