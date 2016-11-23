@@ -50,12 +50,14 @@ body {
 	font-size: 30px;
 	font-weight: 400;
 	text-align: center;
+	font-style: bold;
 }
 
 #login h4 {
 	margin:5px 0 15px;
 	display:block;
 	font-size:13px;
+	text-align:center;
 }
 
 fieldset {
