@@ -249,6 +249,10 @@ app.get('/browse', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'browse.html'));
 });
 
+app.get('/register', function(req, res){
+  res.sendFile(path.join(__dirname, 'ui', 'register.html'));
+});
+
 app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
@@ -257,11 +261,19 @@ app.get('/write-review', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'write-review.html'));
 });
 
-app.get('/write-review.js', function (req, res) {
+app.get('/ui/write-review.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'write-review.js'));
+});
+
+app.get('/ui/register.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'write-review.js'));
 });
 
 app.get('/ui/style.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'style.css'));
+});
+
+app.get('/ui/registerstyle.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
