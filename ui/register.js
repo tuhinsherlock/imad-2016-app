@@ -9,7 +9,6 @@
           if (request.readyState === XMLHttpRequest.DONE) {
               // Take some action
               if (request.status === 200) {
-                  alert('User created successfully');
                   register.value = 'Registered!';
                   window.location.href="/";
               } else {
