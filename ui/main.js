@@ -44,7 +44,7 @@ function loadLoginForm () {
         window.location.href = "/register";
     };
     
-    /*var register = document.getElementById('register_btn');
+    var register = document.getElementById('register_btn');
     register.onclick = function () {
         // Create a request object
         var request = new XMLHttpRequest();
@@ -73,7 +73,7 @@ function loadLoginForm () {
         request.send(JSON.stringify({username: username, password: password}));  
         register.value = 'Registering...';
     
-    };*/
+    };
 }
 
 function loadLoggedInUser (username) {
