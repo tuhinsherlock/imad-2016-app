@@ -38,11 +38,11 @@ function loadLoginForm () {
         
     };
     
-    var register = document.getElementById('register_btn');
+    /*var register = document.getElementById('register_btn');
     
     register.onclick = function() {
         window.location.href = "/register";
-    };
+    };*/
     
     var register = document.getElementById('register_btn');
     register.onclick = function () {
