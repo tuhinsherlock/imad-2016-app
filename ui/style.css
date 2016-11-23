@@ -1,4 +1,8 @@
-body {
-    background-image : url('http://thesmashable.com/wp-content/uploads/2012/07/the_dark_knight_rises_hd_wallpapers_1920x1020_desktop_backgrounds_latest.jpg');
+html { 
+  background: url('http://thesmashable.com/wp-content/uploads/2012/07/the_dark_knight_rises_hd_wallpapers_1920x1020_desktop_backgrounds_latest.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
