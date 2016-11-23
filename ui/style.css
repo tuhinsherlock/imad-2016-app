@@ -1,7 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600);
 
 
-* {
+
+html {
 	margin:0;
 	padding:0;
 	box-sizing:border-box;
@@ -19,7 +20,7 @@ body {
 	font-weight:300;
 	font-size: 12px;
 	line-height:30px;
-	background:#0A5600;
+	background:#12c60b;
 	
 }
 
