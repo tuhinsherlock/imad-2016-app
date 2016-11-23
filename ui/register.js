@@ -11,6 +11,7 @@
               if (request.status === 200) {
                   alert('User created successfully');
                   register.value = 'Registered!';
+                  window.location.href="/";
               } else {
                   alert('Could not register the user');
                   register.value = 'Register';
