@@ -19,7 +19,7 @@ html {
 	-o-font-smoothing:antialiased;
 	font-smoothing:antialiased;
 	text-rendering:optimizeLegibility;
-}*/
+}
 
 body {
 	font-family:"Open Sans", Helvetica, Arial, sans-serif;
@@ -122,3 +122,4 @@ fieldset {
 :-ms-input-placeholder {
  color:#888;
 }
+*/
