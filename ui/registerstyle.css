@@ -1,7 +1,7 @@
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600);
 
-* {
+html {
 	margin:0;
 	padding:0;
 	box-sizing:border-box;
@@ -13,6 +13,16 @@
 	font-smoothing:antialiased;
 	text-rendering:optimizeLegibility;
 }
+
+html { 
+  background: url('http://cdn.pcwallart.com/images/interstellar-poster-wallpaper-1.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+http://cdn.pcwallart.com/images/interstellar-poster-wallpaper-1.jpg
 
 body {
 	font-family:"Open Sans", Helvetica, Arial, sans-serif;
