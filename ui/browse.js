@@ -10,6 +10,10 @@ request1.onreadystatechange = function(){
 		console.log('DONE '+request1.status);
 		if(request1.status===200){
 			console.log("Success");
+			var movie_name = document.getElementById('movie_name').value;
+console.log(movie_name);
+request1.open('GET','/search-movie?movie_name='+movie_name,true);
+request1.send('{}');
 		}
 		else
 		console.log("Error");
@@ -18,9 +22,6 @@ request1.onreadystatechange = function(){
 
 };
 
-var movie_name = document.getElementById('movie_name').value;
-console.log(movie_name);
-request1.open('GET','/search-movie?movie_name='+movie_name,true);
-request1.send('{}');
+
 
 };
