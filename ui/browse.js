@@ -1,7 +1,9 @@
 
-var movie_name = document.getElementById('movie_name').value;
+
 var button = document.getElementById('search');
 button.onclick = function() {
+    
+var movie_name = document.getElementById('movie_name').value;
 
 var request1 = new XMLHttpRequest();
 
