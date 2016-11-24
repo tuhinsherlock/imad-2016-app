@@ -31,7 +31,7 @@ request.onreadystatechange = function(){
 		console.log("Error");
 	}
 };
-console.log('Review.js Review id: ' +review_id)
+console.log('Review.js Review id: ' +review_id);
 request.open('GET','/get-review-details?id='+review_id);
 request.send('{}');
 
