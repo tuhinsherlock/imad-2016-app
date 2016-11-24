@@ -58,8 +58,9 @@
         var q = $("#searchterm").val();
         $.getJSON("https://api.themoviedb.org/3/search/movie?",
         {
-          api_key: '9c6f4edf8b2c52678bf8e0885ff611d9',
-          query:q
+          api_key: "9c6f4edf8b2c52678bf8e0885ff611d9",
+          query:q,
+          callback:"test"
         },
         function(data) {
           $("#results").empty();
