@@ -98,7 +98,7 @@ fieldset {
 	font-size:15px;
 }
 
-#register button[type="submit"]:hover {
+#register input[type="submit"]:hover {
 	background:#03842c;
 	-webkit-transition:background 0.3s ease-in-out;
 	-moz-transition:background 0.3s ease-in-out;
