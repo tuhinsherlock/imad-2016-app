@@ -145,7 +145,7 @@ app.get('/search-movie', function(req, res){
 
     var name = req.query.movie_name;
   
-  name = name.replace(" ", "%20");
+  name = name.replace(/ /g, "%20");
 
   console.log("search-movie name = "+name);
 
