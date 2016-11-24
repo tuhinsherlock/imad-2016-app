@@ -100,8 +100,7 @@ $("#searchterm").keyup(function(e){
 var q = $("#searchterm").val();
     $(document).ready(function(){
       $.ajax({
-        url: 'http://api.themoviedb.org/3/search/movie?api_key=' + api_key,
-        query=q,
+        url: 'http://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query='+q,
         dataType: 'jsonp',
         jsonpCallback: 'testing'
       }).error(function() {
