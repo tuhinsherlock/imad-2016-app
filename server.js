@@ -117,10 +117,21 @@ app.get('/search-movie', function(req, res){
 });
 
 app.post('/submit-review', function(req,res) {
-  console.log(req.body);
   var body = req.body;
+  console.log(body);
+  var userid = req.session.auth.userId;
+  var movieid = parseInt(body.movieid);
   var reviewcon = body.reviewcon;
-  console.log(reviewcon);
+  console.log(userid+' '+movieid+' '+reviewcon);
+   pool.query('INSERT INTO "content" (userid, movieid,date,review) VALUES ($1, $2, $3, $4)', [userid, movieid,new Date(), reviewcon], function (err, result) {
+      if (err) {
+          console.log(err.toString());
+          res.status(500).send(err.toString());
+      } else {
+        console.log('Success');
+          res.send('Successfully inserted review into db: ');
+      }
+   });
 });
 
 

@@ -14,6 +14,7 @@
     "body-parser": "*",
     "crypto": "*",
     "pg": "*",
-    "express-session": "*"
+    "express-session": "*",
+    "Promise":"*"
   }
 }

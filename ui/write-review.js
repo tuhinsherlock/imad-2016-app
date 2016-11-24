@@ -46,5 +46,9 @@ submit.onclick = function(){
 	console.log('POST ---> '+review);
 	request.open('POST', '/submit-review',true);
 	request.setRequestHeader('Content-Type', 'application/json');
-	request.send(JSON.stringify({reviewcon: review}));
+	var reviewObj = {
+						reviewcon: review,
+	 				 	movieid: movie_id
+	 				};
+	request.send(JSON.stringify(reviewObj));
 };

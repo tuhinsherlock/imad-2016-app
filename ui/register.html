@@ -1,4 +1,4 @@
-<!--
+
 	<html>
 	<head>
 
@@ -39,7 +39,6 @@
 
 </body> 
 </html>
--->
 
 
 <!--
@@ -80,8 +79,7 @@
 </html>
 -->
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>jQuery Test</title>
@@ -97,7 +95,9 @@
     var api_key = '9c6f4edf8b2c52678bf8e0885ff611d9';
 
 
-var q = $("#searchterm").val();
+  var button = document.getElementById('search');
+  button.onclick =function(){
+  var q = $("#searchterm").val();
     $(document).ready(function(){
       $.ajax({
         url: 'http://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query='+q,
@@ -107,10 +107,12 @@ var q = $("#searchterm").val();
         console.log('error')
       }).done(function(response) {
         for (var i = 0; i < response.results.length; i++) {
+         // $.each(response.query.search,function(i,results){
           $('#search_results').append('<li>' + response.results[i].title + '</li>');
         }
       });
     });
+  };
   </script>
 
   <h2>jQuery Test</h2>
@@ -121,3 +123,4 @@ var q = $("#searchterm").val();
 
 </body>
 </html>
+-->
