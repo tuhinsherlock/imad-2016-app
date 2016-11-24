@@ -1,4 +1,5 @@
 var button = document.getElementById('search');
+
 button.onclick = function() {
 
 var request1 = new XMLHttpRequest();
