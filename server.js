@@ -142,9 +142,10 @@ app.get('/get-review-details',function(req,res) {
 });
  
 app.get('/search-movie', function(req, res){
-	var name = req.query.movie_name;
+
+    var name = req.query.movie_name;
   
-	name = name.replace(/ /g, "%20");
+  name = name.replace(" ", "%20");
 
   console.log("search-movie name = "+name);
 
