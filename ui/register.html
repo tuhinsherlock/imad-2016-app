@@ -1,6 +1,7 @@
 
 	<html>
 	<head>
+	<!--
 	<link href = "/ui/registerstyle.css" rel ="stylesheet" />
 	<link href = "/ui/bootstrap.css" rel = "stylesheet" />
 	<link href = "http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet" />
@@ -34,6 +35,39 @@
 
 <script type = "text/javascript" src = "ui/register.js" >
 </script>
+-->
 
-</body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+Search Wikipedia!
+<input id="searchterm" type="text" /> <button id="search">search</button>
+
+<script type="text/javascript">// <![CDATA[
+      $("#searchterm").keyup(function(e){
+        var q = $("#searchterm").val();
+        $.getJSON("http://en.wikipedia.org/w/api.php?callback=?",
+        {
+          srsearch: q,
+          action: "query",
+          list: "search",
+          format: "json"
+        },
+        function(data) {
+          $("#results").empty();
+          $("#results").append("
+ 
+Results for <b>" + q + "</b>
+
+");
+          $.each(data.query.search, function(i,item){
+            $("#results").append("
+<div><a href='http://en.wikipedia.org/wiki/" + encodeURIComponent(item.title) + "'>" + item.title + "</a>" + item.snippet + "</div>
+");
+          });
+        });
+      });
+ 
+// ]]></script>
+
+
+</body> 
 </html>
