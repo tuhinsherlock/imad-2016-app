@@ -82,10 +82,71 @@ function getMovieDetailsOptions(movie_id){
     return options;
 }
 
+
+app.get('/get-review-details',function(req,res) {
+
+  var review_id = req.query.id;
+  console.log("Review Id: "+review_id);
+  pool.query('SELECT * FROM "content","user" WHERE content.id = $1 AND content.userid="user".id', [review_id], function (err, result) {
+      if (err) 
+      {
+        res.status(500).send(err.toString());
+        console.log(err.toString());
+      } 
+      else if (result.rows.length === 0) 
+      {
+        res.status(403).send('Review Not Found');
+        console.log('Review Not Found');
+      }
+      else 
+      {
+        var review_details= result.rows[0];
+        delete review_details.password;
+       console.log(review_details);
+
+        var req1 = http.request(getMovieDetailsOptions(review_details.movieid), function(res1){
+          var chunks = [];
+          
+          res1.on("data", function(chunk){
+              chunks.push(chunk);
+          });
+          
+          res1.on("end", function(){
+              var body = Buffer.concat(chunks);
+              body = JSON.parse(body);
+              console.log(JSON.stringify(body));
+              
+              if(res1.statusCode==200){
+                  var movie_details = {
+                      movie_name : body.title,
+                      poster_path : tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][0]+body.poster_path,
+                      release_date : body.release_date,
+                      overview : body.overview
+                  }
+                  console.log('Returning ----> '+JSON.stringify(movie_details));
+                  
+                  var combine = {review_details: review_details, movie_details: movie_details};
+                  res.send(JSON.stringify(combine));
+      
+              }
+              else{
+                  console.log("ERROR status "+res1.statusCode);
+                  res.send('Error'+res1.statusCode);
+              }
+          });
+      });
+      req1.write("{}");
+      req1.end();
+      }
+    });
+});
+ 
 app.get('/search-movie', function(req, res){
 	var name = req.query.movie_name;
+  
 	name = name.replace(/ /g, "%20");
-	console.log("search-movie name = "+name);
+
+  console.log("search-movie name = "+name);
 
     var req1 = http.request(getSearchRequestOptions(name), function(res1){
     
@@ -140,7 +201,6 @@ app.get('/get-movie-details', function(req, res){
     var id = req.query.movie_id;
 
     console.log("get-movie-details id="+id);
-    
     var req1 = http.request(getMovieDetailsOptions(id), function(res1){
         var chunks = [];
         
@@ -161,17 +221,26 @@ app.get('/get-movie-details', function(req, res){
                     overview : body.overview
                 }
                 console.log('Returning ----> '+JSON.stringify(movie_details));
+                
                 res.send(JSON.stringify(movie_details));
+      
+    
             }
             else{
                 console.log("ERROR status "+res1.statusCode);
-                res.send("ERROR status "+res1.statusCode);
+                res.send('Error'+res1.statusCode);
             }
         });
     });
     req1.write("{}");
     req1.end();
+
 });
+
+function querytmdbmovieid(id)
+{
+  
+}
 
 function hash (input, salt) {
     // How do we create a hash?
@@ -255,6 +324,10 @@ app.get('/logout', function (req, res) {
    res.send('<html><body>Logged out!<br/><br/><a href="/">Back to home</a></body></html>');
 });
 
+app.get('/review', function(req, res){
+    res.sendFile(path.join(__dirname, 'ui', 'review.html'));
+});
+
 app.get('/browse', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'browse.html'));
 });
@@ -288,12 +361,15 @@ app.get('/ui/main.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'main.js'));
 });
 
-app.get('/ui/Sherlock.jpg', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'Sherlock.jpg'));
+app.get('/ui/review.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'review.js'));
+});
+
+app.get('/ui/browse.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'browse.js'));
 });
 
 app.get('/ui/write-review.js', function (req, res) {
-  res.set('Content-Type', 'text/javascript');
   res.sendFile(path.join(__dirname, 'ui', 'write-review.js'));
 });
 
