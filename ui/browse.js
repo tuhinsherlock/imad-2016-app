@@ -1,8 +1,5 @@
 var button = document.getElementById('search');
 button.onclick = function() {
-    
-
-console.log(movie_name);
 
 var request1 = new XMLHttpRequest();
 
@@ -18,6 +15,7 @@ request1.onreadystatechange = function(){
 	}
 
 var movie_name = document.getElementById('movie_name').value;
+onsole.log(movie_name);
 request1.open('GET','/search-movie?movie_name='+movie_name, true);
 request1.send('{}');
 
