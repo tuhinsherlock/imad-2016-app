@@ -88,13 +88,20 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
+    
+    <input id="searchterm" />
+    <button id="search">search</button>
+    <div id="results"></div>
 
   <script type="text/javascript" charset="utf-8">
     var api_key = '9c6f4edf8b2c52678bf8e0885ff611d9';
 
+$("#searchterm").keyup(function(e){
+var q = $("#searchterm").val();
     $(document).ready(function(){
       $.ajax({
-        url: 'http://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query=fight+club',
+        url: 'http://api.themoviedb.org/3/search/movie?api_key=' + api_key,
+        query=q,
         dataType: 'jsonp',
         jsonpCallback: 'testing'
       }).error(function() {
