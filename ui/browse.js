@@ -15,11 +15,12 @@ request1.onreadystatechange = function(){
 		console.log("Error");
 	}
 
+
+};
+
 var movie_name = document.getElementById('movie_name').value;
 onsole.log(movie_name);
 request1.open('GET','/search-movie?movie_name='+movie_name, true);
 request1.send('{}');
-
-};
 
 };
