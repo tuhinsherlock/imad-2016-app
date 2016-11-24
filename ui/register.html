@@ -65,7 +65,7 @@
         function(data) {
           $("#results").empty();
           $("#results").append("<p>Results for <b>" + q + "</b></p>");
-          $.each(data.query.q, function(i,item){
+          $.each(data.query.search, function(i,item){
             $("#results").append("<div><a href='http://en.wikipedia.org/wiki/" + encodeURIComponent(item.title) + "'>" + item.title+ "</a><br>");
           });
         });
