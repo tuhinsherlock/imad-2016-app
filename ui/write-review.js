@@ -44,7 +44,7 @@ submit.onclick = function(){
 
 	var review = document.getElementById('review').value;
 	console.log('POST ---> '+review);
-	request.open('POST', '/submit-review',true);
+	request.open('POST','/submit-review',true);
 	request.setRequestHeader('Content-Type', 'application/json');
 	var reviewObj = {
 						reviewcon: review,
