@@ -1,28 +1,31 @@
 var button = document.getElementById('search');
+var search_box = document.getElementById('movie_name');
+var livesearch = document.getElementById('livesearch');
 
-button.onclick = function() {
-
-var request1 = new XMLHttpRequest();
-
-request1.onreadystatechange = function(){
-
-	if(request1.readyState === XMLHttpRequest.DONE){
-		console.log('DONE '+request1.status);
-		if(request1.status===200){
-			console.log("Success");
-			
+search_box.onkeyup = function(){
+	var request = new XMLHttpRequest();
+	request.onreadystatechange = function(){
+		if(request.readyState === XMLHttpRequest.DONE){
+			console.log('DONE '+request.status);
+			if(request.status===200){
+				console.log('Received ----> '+this.responseText);
+				response = JSON.parse(this.responseText);
+				var results = '<ul>';
+				for (var i = 0; i < response.length; i++) {
+					results += '<li>';
+					results += '<img src="'+response[i].poster_path+'">';
+					results += response[i].movie_name+ '<a href="/write-review?movie_id='+response[i].id+'">';
+					results += ' select </a> </li>';
+				}
+				results += '</ul>';
+				livesearch.innerHTML = results;
+			}
+			else
+			console.log("Error");
 		}
-		else
-		console.log("Error");
-	}
-
-
-};
-
-var movie_name = document.getElementById('movie_name').value;
-console.log(movie_name);
-request1.open('GET','/search-movie?movie_name='+movie_name,true);
-request1.send('{}');
-
-
-};
+	};
+	var search_term = search_box.value;
+	console.log('Search term: ' + search_term);
+	request.open('GET','/get-search-results?term='+search_term);
+	request.send('{}');
+}

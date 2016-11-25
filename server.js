@@ -49,7 +49,8 @@ var tmdbconfigreq = http.request({
     var body = Buffer.concat(chunks);
     body = JSON.parse(body);
     tmdbconfig = body;
-    console.log('tmdbconfig ---> '+JSON.stringify(body));
+    //console.log('tmdbconfig ---> '+JSON.stringify(body));
+    console.log('Config ready');
   });
 });
 
@@ -141,15 +142,15 @@ app.get('/get-review-details',function(req,res) {
     });
 });
  
-app.get('/search-movie', function(req, res){
+app.get('/get-search-results', function(req, res){
 
-    var name = req.query.movie_name;
+    var term = req.query.term;
   
-  name = name.replace(/ /g, "%20");
+  term = term.replace(/ /g, "%20");
 
-  console.log("search-movie name = "+name);
+  console.log("search-movie term = "+term);
 
-    var req1 = http.request(getSearchRequestOptions(name), function(res1){
+    var req1 = http.request(getSearchRequestOptions(term), function(res1){
     
         var chunks = [];
         
@@ -160,12 +161,22 @@ app.get('/search-movie', function(req, res){
         res1.on("end", function(){
             var body = Buffer.concat(chunks);
 	           body = JSON.parse(body);
-            console.log(body.toString());
           
             if(res1.statusCode==200){
-                var movie_id = body["results"][0]["id"];
-                console.log("search result id = "+movie_id);
-                res.redirect("/write-review?movie_id="+movie_id);
+                var results = body["results"].slice(0, 5);   //return max 5 results
+                var results1 = [];
+                for(var i=0; i<results.length; i++){
+                  var movie_details = {
+                      movie_name : results[i].title,
+                      id : results[i].id,
+                      poster_path : tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][0]+results[i].poster_path,
+                      release_date : body.release_date,
+                      overview : body.overview
+                  }
+                  results1.push(movie_details);
+                }
+                console.log("results = "+results1);
+                res.send(JSON.stringify(results1));
            }
             else{
                 console.log("ERROR status "+res1.statusCode);
