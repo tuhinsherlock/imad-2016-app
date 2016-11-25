@@ -197,7 +197,7 @@ app.post('/submit-review', function(req,res) {
   
   var reviewcon = body.reviewcon;
   console.log(userid+' '+movieid+' '+reviewcon);
-   pool.query('INSERT INTO "content" (userid, movieid, date, review,u) VALUES ($1, $2, $3, $4)', [userid, movieid,new Date(), reviewcon], function (err, result) {
+   pool.query('INSERT INTO "content" (userid, movieid, date, review) VALUES ($1, $2, $3, $4)', [userid, movieid,new Date(), reviewcon], function (err, result) {
       if (err) {
           console.log(err.toString());
           res.status(500).send(err.toString());
