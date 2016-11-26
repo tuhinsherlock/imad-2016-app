@@ -5,6 +5,14 @@
     padding: 0;
 }
 
+html { 
+  background: url('http://www.wallpapers4u.org/wp-content/uploads/quentin_tarantino_actor_director_jacket_pistol_pants_celebrity_hollywood_black_and_white_18775_1920x1080.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .moviesearch {
 	
 	width: 600px;
