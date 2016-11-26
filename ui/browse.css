@@ -13,7 +13,7 @@ html {
   background-size: cover;
 }
 
-h1{
+.search{
     position: absolute;
      font-family: Montserrat, sans-serif;
      font-weight: bold;
