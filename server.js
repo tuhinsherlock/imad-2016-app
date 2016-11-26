@@ -170,7 +170,8 @@ app.get('/get-search-results', function(req, res){
                       movie_name : results[i].title,
                       id : results[i].id,
                       poster_path : tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][0]+results[i].poster_path,
-                      release_date : body.release_date,
+                      logo : tmdbconfig['images']['base_url']+tmdbconfig['images']['logo_sizes'][0]+results[i].poster_path,
+                      release_date : results[i].release_date.split('-')[0],
                       overview : body.overview
                   }
                   results1.push(movie_details);
@@ -397,7 +398,10 @@ app.get('/ui/browse.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'browse.css'));
 });
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0030235e5c5a485066c7a9011d1a7391a4478495
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80
 app.listen(8080, function () {
   console.log("IMAD course app listening on port "+port);
