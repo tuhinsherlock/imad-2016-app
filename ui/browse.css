@@ -17,9 +17,9 @@ html {
     position: absolute;
      font-family: Montserrat, sans-serif;
      font-weight: bold;
-     top: 130px;
-     left: 150px;
-     font-size: 18px;
+     top: 120px;
+     left: %30;
+     font-size: 25px;
      color: #ef631c;
     }
     
