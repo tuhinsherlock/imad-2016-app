@@ -1,0 +1,82 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+ 
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.moviesearch {
+	
+	width: 600px;
+	height: 40px;
+	position: relative;
+	z-index: 2;
+	left: 27%;
+	top: 150px;
+    padding: 15px 0 15px 20px;
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+    border: 0 none;
+    height: 52px;
+    margin-right: 0;
+    color: white;
+    outline: none;
+    background: #1f7f5c;
+    float: left;
+    box-sizing: border-box;
+    transition: all 0.15s;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: white;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: white;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: white;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: white;
+}
+#search_text:focus {
+    background: rgb(64, 151, 119);
+}
+
+ul{
+	list-style-type: none;
+}
+
+.subnav {
+
+	position: relative;
+	top: 280px;
+	left:30%;
+	width: 500px;
+	height: 30px;
+	transition: all 0.1s;
+	background: #232323;
+
+}
+
+.subnav {
+
+	font-size: 16px; 
+	color: white;
+	display: block;
+	line-height: 30px;
+	width:500px;
+	padding: 0 26px;
+	text-decoration: none;
+	border-left: 1px solid #2e2e2e;
+	font-family: Montserrat, sans-serif;
+	text-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+
+.subnav li {
+	float: none;
+}
+.subnav li a {
+	border-bottom: 1px solid #2e2e2e;
+}
