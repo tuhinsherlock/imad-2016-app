@@ -13,14 +13,14 @@ html {
   background-size: cover;
 }
 
-.search {
+h1{
+    position: absolute;
      font-family: Montserrat, sans-serif;
      font-weight: bold;
+     left: 150px;
      top: 130px;
-     left: 30%;
      font-size: 18px;
      color: #ef631c;
-     margin-top: 130px;
     }
     
 .moviesearch {
