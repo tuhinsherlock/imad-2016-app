@@ -46,6 +46,10 @@ html {
 
 }
 
+.livesearch {
+    text-decoration : none;
+    color:#FFFFFF;
+}
 ::-webkit-input-placeholder { /* WebKit browsers */
     color: white;
 }
