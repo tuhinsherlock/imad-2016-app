@@ -398,10 +398,6 @@ app.get('/ui/browse.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'browse.css'));
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0030235e5c5a485066c7a9011d1a7391a4478495
 var port = 8080; // Use 8080 for local development because you might already have apache running on 80
 app.listen(8080, function () {
   console.log("IMAD course app listening on port "+port);
