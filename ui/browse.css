@@ -13,14 +13,23 @@ html {
   background-size: cover;
 }
 
+.search {
+     font-family: Montserrat, sans-serif;
+     font-weight: bold;
+     top: 130px;
+     font-size: 18px;
+     left: 30%;
+     color: #ef631c;
+    
+}
 .moviesearch {
 	
 	width: 600px;
 	height: 40px;
 	position: relative;
 	z-index: 2;
-	left: 27%;
 	top: 150px;
+	left: 27%;
     padding: 15px 0 15px 20px;
     font-size: 16px;
     font-family: Montserrat, sans-serif;
