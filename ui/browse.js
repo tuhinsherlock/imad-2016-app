@@ -14,7 +14,7 @@ search_box.onkeyup = function(){
 				for (var i = 0; i < response.length; i++) {
 					results += '<li><a href="/write-review?movie_id='+response[i].id+'">';
 					results += '<img src="'+response[i].logo+'">';
-					results += '&emsp;&emsp;&emsp;&emsp;&emsp;'+response[i].movie_name+' ( '+response[i].release_date+' )';
+					results += '&emsp;&emsp;&emsp;'+response[i].movie_name+' ( '+response[i].release_date+' )';
 					results += '</a> </li>';
 				}
 				//results += '</ul>';
@@ -28,4 +28,4 @@ search_box.onkeyup = function(){
 	console.log('Search term: ' + search_term);
 	request.open('GET','/get-search-results?term='+search_term);
 	request.send('{}');
-}
+};
