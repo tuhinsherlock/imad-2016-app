@@ -46,10 +46,13 @@ html {
 
 }
 
-.livesearch {
-    text-decoration : none;
-    color:#FFFFFF;
-}
+.livesearch li a:visited, a:link, a:hover, a:active{
+		color:#FFFFFF;
+		text-decoration: none !important;
+		width:600px;
+		display: inline-block;
+	}
+	
 ::-webkit-input-placeholder { /* WebKit browsers */
     color: white;
 }
