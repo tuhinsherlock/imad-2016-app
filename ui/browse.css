@@ -25,6 +25,7 @@
     float: left;
     box-sizing: border-box;
     transition: all 0.15s;
+
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
@@ -48,35 +49,25 @@ ul{
 }
 
 .subnav {
-
-	position: relative;
-	top: 280px;
-	left:30%;
-	width: 500px;
-	height: 30px;
+	
+	position: absolute;
+	top: 270px;
+	left:27%;
+	/*width: 600px;*/
+	height: auto;
+	opacity: 1;
 	transition: all 0.1s;
 	background: #232323;
-
+	font-size: 18px;
+    font-family: Montserrat, sans-serif;
+    color:white;
 }
-
-.subnav {
-
-	font-size: 16px; 
-	color: white;
-	display: block;
-	line-height: 30px;
-	width:500px;
-	padding: 0 26px;
-	text-decoration: none;
-	border-left: 1px solid #2e2e2e;
-	font-family: Montserrat, sans-serif;
-	text-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
-}
-
-
 .subnav li {
 	float: none;
 }
 .subnav li a {
 	border-bottom: 1px solid #2e2e2e;
 }
+
+
+
