@@ -10,14 +10,14 @@ search_box.onkeyup = function(){
 			if(request.status===200){
 				console.log('Received ----> '+this.responseText);
 				response = JSON.parse(this.responseText);
-				var results = '<ul>';
+				var results = ' ';
 				for (var i = 0; i < response.length; i++) {
-					results += '<li>';
-					results += '<img src="'+response[i].poster_path+'">';
-					results += response[i].movie_name+ '<a href="/write-review?movie_id='+response[i].id+'">';
-					results += ' select </a> </li>';
+					results += '<li><a href="/write-review?movie_id='+response[i].id+'">';
+					results += '<img src="'+response[i].logo+'">';
+					results += '&emsp;&emsp;&emsp;'+response[i].movie_name+' ( '+response[i].release_date+' )';
+					results += '</a> </li>';
 				}
-				results += '</ul>';
+				//results += '</ul>';
 				livesearch.innerHTML = results;
 			}
 			else
