@@ -1,12 +1,17 @@
 var button = document.getElementById('search');
 var search_box = document.getElementById('movie_name');
 var livesearch = document.getElementById('livesearch');
+var keyups = 0;
 
 search_box.onkeyup = function(){
+	keyups++;
+	var keyupscopy = keyups;
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
 		if(request.readyState === XMLHttpRequest.DONE){
 			console.log('DONE '+request.status);
+			if(keyups!=keyupscopy)
+				return;
 			if(request.status===200){
 				console.log('Received ----> '+this.responseText);
 				response = JSON.parse(this.responseText);
