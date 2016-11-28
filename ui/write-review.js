@@ -7,6 +7,8 @@ var poster = document.getElementById('poster');
 var year = document.getElementById('year_of_release');
 var desc = document.getElementById('description');
 
+var response;
+
 var request1 = new XMLHttpRequest();
 request1.onreadystatechange = function(){
 	if(request1.readyState === XMLHttpRequest.DONE){
@@ -32,12 +34,14 @@ submit.onclick = function(){
 	
 	var request = new XMLHttpRequest();
 
+
 	request.onreadystatechange = function(){
 
 		if(request.readyState === XMLHttpRequest.DONE){
 			if(request.status === 200){
+				response = JSON.parse(this.responseText);
 				console.log('Review Submitted');
-				alert("Review Submitted");
+				window.location.href=response.redirect;
 			}
 		}
 	};
@@ -51,4 +55,7 @@ submit.onclick = function(){
 	 				 	movieid: movie_id
 	 				};
 	request.send(JSON.stringify(reviewObj));
+
+
+
 };
