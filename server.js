@@ -28,7 +28,6 @@ app.use(session({
 }));
 
 
-
 var api_key = '9c6f4edf8b2c52678bf8e0885ff611d9';
 var tmdbconfig;
 var tmdbconfigreq = http.request({
