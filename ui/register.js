@@ -29,16 +29,24 @@
         var namev = name.value;
         var emailv = email.value;
 
-        if(unamev.length===0)
+        if(unamev.length===0){
           username.placeholder= "Username is required";
-        if(passv.length===0)
+          username.className += " formInvalid";
+        }
+        if(passv.length===0){
           password.placeholder="Password is required";
-        if(namev.length===0)
+          password.className += " formInvalid";
+        }
+        if(namev.length===0){
           name.placeholder= "Name is required";
-        if(emailv.length===0)
+          name.className += " formInvalid";
+        }
+        if(emailv.length===0){
           email.placeholder= "Email is required";
+          email.className += " formInvalid";
+        }
 
-        if(unamev && passwv && namev && emailv)
+        if(unamev && passv && namev && emailv)
         {
           console.log(username);
           console.log(password);

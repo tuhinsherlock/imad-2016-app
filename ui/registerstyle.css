@@ -123,3 +123,16 @@ fieldset {
 :-ms-input-placeholder {
  color:#888;
 }
+
+input.formInvalid::-webkit-input-placeholder {
+	color: red;
+}
+input.formInvalid:-moz-placeholder {
+	color: red;
+}
+input.formInvalid::-moz-placeholder {
+	color: red;
+}
+input.formInvalid::-ms-input-placeholder {
+	color: red;
+}

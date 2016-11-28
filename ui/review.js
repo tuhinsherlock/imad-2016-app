@@ -18,14 +18,14 @@ request.onreadystatechange = function(){
 		console.log('DONE '+request.status);
 		if(request.status===200){
 			console.log('Received ----> '+this.responseText);
-			 response = JSON.parse(this.responseText);
-			 movie_name.innerHTML = response[1]["movie_name"];
-				poster.src = response[1]["poster_path"];
-				year.innerHTML = response[1]["release_date"];
-				desc.innerHTML = response[1]["overview"];
-				username.innerHTML = response[0]["username"];
-				date.innerHTML = response[0]["date"];
-				review.innerHTML = response[0]["review"];	
+			response = JSON.parse(this.responseText);
+			movie_name.innerHTML = response[1]["moviename"];
+			poster.src = response[1]["posterpath"];
+			year.innerHTML = response[1]["release"];
+			desc.innerHTML = response[1]["overview"];
+			username.innerHTML = response[0]["username"];
+			date.innerHTML = response[0]["date"];
+			review.innerHTML = response[0]["review"];	
 		}
 		else
 		console.log("Error");

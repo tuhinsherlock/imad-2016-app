@@ -79,7 +79,29 @@ function getMovieDetailsOptions(movie_id){
     return options;
 }
 
-function tmdbquerybyid(movieid, array, res){
+function savemoviedetails(body, res){
+    var fullposterpath = tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][0]+body.poster_path;
+    pool.query('INSERT into "movie" (id, name, posterpath, release, overview) VALUES ($1, $2, $3, $4, $5)',
+                [body.id, body.title, fullposterpath, body.release_date, body.overview], function (err, result) {
+        if (err) {
+            console.log(err.toString());
+            res.status(500).send(err.toString());
+        } else {
+            console.log('Successfully inserted movie into db');
+            var moviedetails = {
+                id : body.id,
+                name : body.title,
+                posterpath : fullposterpath,
+                release : body.release_date,
+                overview : body.overview
+            };
+            console.log('Returning ---> '+JSON.stringify(moviedetails));
+            res.send(JSON.stringify(moviedetails));
+        }
+    });
+}
+
+function tmdbquerybyid(movieid, res){
     var tmdbreq = http.request(getMovieDetailsOptions(movieid), function(tmdbres){
         var chunks = [];
         
@@ -93,21 +115,7 @@ function tmdbquerybyid(movieid, array, res){
             console.log(JSON.stringify(body));
             
             if(tmdbres.statusCode==200){
-                var movie_details = {
-                    movie_name : body.title,
-                    poster_path : tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][0]+body.poster_path,
-                    release_date : body.release_date,
-                    overview : body.overview
-                }
-
-                if(array==null)
-                    array = movie_details;
-                else
-                    array.push(movie_details);
-                console.log('Returning ----> '+JSON.stringify(array));
-                
-                res.send(JSON.stringify(array));
-    
+                savemoviedetails(body, res);
             }
             else{
                 console.log("ERROR status "+tmdbres.statusCode);
@@ -119,30 +127,35 @@ function tmdbquerybyid(movieid, array, res){
     tmdbreq.end();
 }
 
+app.get('/get-recent', function(req, res){
+    pool.query('SELECT content.id as reviewid, content.userid, "user".name', content.movieid)
+});
+
+
 app.get('/get-review-details',function(req, res) {
 
     var review_id = req.query.id;
     console.log("Review Id: "+review_id);
-    pool.query('SELECT * FROM "content","user" WHERE content.id = $1 AND content.userid="user".id', [review_id], function (err, result) {
+    pool.query('SELECT "content".userid, "content".movieid, "content".date, movie".name AS moviename, "movie".posterpath, "movie".release, "movie".overview, "user".username' +
+               ' FROM "content","user","movie" WHERE "conten"t.id = $1 AND "content".userid = "user".id AND "content".movieid = "movie".id',
+                [review_id], function (err, result) {
         if (err) 
         {
-          res.status(500).send(err.toString());
-          console.log(err.toString());
+            res.status(500).send(err.toString());
+            console.log(err.toString());
         } 
         else if (result.rows.length === 0) 
         {
-          res.status(403).send('Review Not Found');
-          console.log('Review Not Found');
+            res.status(404).send('Review Not Found');
+            console.log('Review Not Found');
         }
         else 
         {
             var review_details = result.rows[0];
-            delete review_details.password;
             console.log('Fetched review ---> '+JSON.stringify(review_details));
 
-            var array = [review_details];
+            res.send(JSON.stringify(result));
 
-            tmdbquerybyid(review_details.movieid, array, res);
         }
     });
 });
@@ -221,9 +234,20 @@ app.post('/submit-review', function(req,res) {
 
 app.get('/get-movie-details', function(req, res){
 
-    var id = req.query.movie_id;
-    console.log("get-movie-details id="+id);
-    tmdbquerybyid(id, null, res);
+    var movieid = req.query.movieid;
+    console.log("get-movie-details movieid="+movieid);
+
+    pool.query('SELECT * from "movie" where id = $1', [movieid], function(err, result){
+        if (err) {
+            res.status(500).send(err.toString());
+        }
+        else if(result.rows.length === 0) {
+            tmdbquerybyid(movieid, res);
+        }
+        else{
+            res.send(JSON.stringify(result.rows[0]));
+        }
+    });
 
 });
 
@@ -361,6 +385,19 @@ app.get('/ui/browse.js', function (req, res) {
 
 app.get('/ui/browse.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'browse.css'));
+});
+
+
+app.get('/recent', function(req, res){
+  res.sendFile(path.join(__dirname, 'ui', 'recent.html'));
+});
+
+app.get('/ui/recent.js', function(req, res){
+  res.sendFile(path.join(__dirname, 'ui', 'recent.js'));
+});
+
+app.get('/ui/recent.css', function(req, res){
+  res.sendFile(path.join(__dirname, 'ui', 'recent.css'));
 });
 
 

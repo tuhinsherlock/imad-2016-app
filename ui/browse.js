@@ -22,7 +22,7 @@ search_box.onkeyup = function(){
 				response = JSON.parse(this.responseText);
 				var results = ' ';
 				for (var i = 0; i < response.length; i++) {
-					results += '<li><a href="/write-review?movie_id='+response[i].id+'">';
+					results += '<li><a href="/write-review?movieid='+response[i].id+'">';
 					results += '<img src="'+response[i].logo+'">';
 					results += '&emsp;&emsp;&emsp;'+response[i].movie_name+' ( '+response[i].release_date+' )';
 					results += '</a> </li>';

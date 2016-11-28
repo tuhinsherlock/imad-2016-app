@@ -14,9 +14,9 @@ request1.onreadystatechange = function(){
 		if(request1.status===200){
 			console.log('Received ----> '+this.responseText);
 			var response = JSON.parse(this.responseText);
-			movie_name.innerHTML = response["movie_name"];
-			poster.src = response["poster_path"];
-			year.innerHTML = response["release_date"];
+			movie_name.innerHTML = response["name"];
+			poster.src = response["posterpath"];
+			year.innerHTML = response["release"];
 			desc.innerHTML = response["overview"];
 		}
 		else
@@ -24,7 +24,7 @@ request1.onreadystatechange = function(){
 	}
 };
 
-request1.open('GET','/get-movie-details?movie_id='+movie_id);
+request1.open('GET','/get-movie-details?movieid='+movie_id);
 request1.send('{}');
 
 var submit = document.getElementById('submit_btn');
