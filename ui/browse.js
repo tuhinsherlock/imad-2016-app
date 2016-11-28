@@ -5,6 +5,11 @@ var keyups = 0;
 
 search_box.onkeyup = function(){
 	keyups++;
+    var search_term = search_box.value;
+    if(search_term.length==0){
+        livesearch.innerHTML = '';
+        return;
+    }
 	var keyupscopy = keyups;
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
@@ -29,7 +34,6 @@ search_box.onkeyup = function(){
 			console.log("Error");
 		}
 	};
-	var search_term = search_box.value;
 	console.log('Search term: ' + search_term);
 	request.open('GET','/get-search-results?term='+search_term);
 	request.send('{}');
