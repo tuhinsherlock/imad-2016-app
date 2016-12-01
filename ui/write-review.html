@@ -1,23 +1,60 @@
 <html>
 <head>
+<link href = "/ui/write-review.css" rel ="stylesheet" type = "text/css" />
+	<link href = "/ui/bootstrap.css" rel = "stylesheet" />
+	<link href = "http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet" />
 <title id = "review_title"> 
 Review for 
 </title>
 </head>
-<body> 
-<div class = "movie_name" id = "movie_name">
+<body>
+
+<div class = "col-sm-3">
+	<div class = "poster">
+		<img src = "" id = "poster">
+	</div>
 </div>
-<div class = "poster">
-<img src = "" id = "poster">
+
+<div class = "col-sm-9">
+
+	<ul class="text-details">
+		<li>
+			<div class = "movie_name" id = "movie_name">
+			</div>
+			
+		</li>
+		<br>
+		<li>
+			<div class = "director" id = "director">
+			</div>
+			
+		</li>
+		<br>
+		<li>
+		
+			<div class = "year_of_release" id = "year_of_release">
+			</div>
+			
+		</li>
+		<br>
+		<li>
+			<div class = "description" id = "description">
+			</div>
+			<br>
+		</li>
+	<li>
+	<div class = "submit-review">
+		<textarea id = "review" placeholder = "Write your review here">
+		</textarea>
+		<br>
+		<input type="submit" value="Submit" id = "submit_btn" class ="submit_btn">
+	</div>
+	</li>
+	</ul>
 </div>
-<div class = "year_of_release" id = "year_of_release">
-</div>
-<div class = "description" id = "description">
-</div>
-<div>
-<input type = "text" id = "review" placeholder = "Write your review here"/>
-<input type="submit" value="Submit" id = "submit_btn">
-</div>
+
+
+
 <script type = "text/javascript" src = "/ui/write-review.js">
 </script>
 </body>

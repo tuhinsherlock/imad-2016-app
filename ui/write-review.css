@@ -1,0 +1,53 @@
+/*.text-details {
+	background : #232323;
+	height: 60px;
+	display: inline-block;
+}*/
+html { 
+  background: url('/ui/dark.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.text-details {
+	margin-top: 20px;
+	margin-right: 20px;
+	color: white;
+}
+.text-details li {
+	float: left;
+	list-style-type: none;
+	position: relative;
+
+}
+
+.poster {
+	margin-left: 80px;
+	margin-top: 20px;
+}
+
+textarea{
+	margin-top: 5px;
+	width: 800px;
+	height: 400px;
+	font-weight: bold;
+	background-color: rgba(255, 255, 255, 0.2);
+	color: white;
+}
+
+.submit-review
+{
+	margin-right:20px;
+	top: 30%;
+
+	position: relative;
+}
+
+.submit_btn{
+	color: black;
+	font-weight: bold;
+	margin-top: 3px;
+	padding: 5px;
+}

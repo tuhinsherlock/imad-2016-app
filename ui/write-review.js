@@ -1,13 +1,16 @@
 var query = window.location.search;
 var movie_id = query.split('=')[1];
+var movie_id = query.split('=')[1];
 console.log(movie_id);
 
 var movie_name = document.getElementById('movie_name');
 var poster = document.getElementById('poster');
 var year = document.getElementById('year_of_release');
 var desc = document.getElementById('description');
+var dir = document.getElementById('director');
 
 var response;
+var directors=[];
 
 var request1 = new XMLHttpRequest();
 request1.onreadystatechange = function(){
@@ -20,6 +23,8 @@ request1.onreadystatechange = function(){
 			poster.src = response["posterpath"];
 			year.innerHTML = response["release"];
 			desc.innerHTML = response["overview"];
+			
+			dir.innerHTML = response["director"];
 		}
 		else
 		console.log("Error");
@@ -28,6 +33,7 @@ request1.onreadystatechange = function(){
 
 request1.open('GET','/get-movie-details?movieid='+movie_id);
 request1.send('{}');
+
 
 var submit = document.getElementById('submit_btn');
 submit.onclick = function(){

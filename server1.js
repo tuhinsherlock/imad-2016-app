@@ -71,29 +71,41 @@ function getSearchRequestOptions(movie_name){
 function getMovieDetailsOptions(movie_id){
     var options = {
       "method": "GET",
-      "hostname": "api.themoviedb.org",
+      "hostname": "th",
       "port": null,
-      "path": "/3/movie/"+movie_id+"?api_key="+api_key,
+      "path": "/3/movie/"+movie_id+"?api_key="+api_key+"&append_to_response=credits",
       "headers": {}
     };
     return options;
 }
 
 function savemoviedetails(body, res){
+   var directors=[];
+   var director;
     var fullposterpath = tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][0]+body.poster_path;
     pool.query('INSERT into "movie" (id, name, posterpath, release, overview) VALUES ($1, $2, $3, $4, $5)',
-                [body.id, body.title, fullposterpath, body.release_date, body.overview], function (err, result) {
+                [body.id, body.original_title, fullposterpath, body.release_date, body.overview], function (err, result) {
         if (err) {
             console.log(err.toString());
             res.status(500).send(err.toString());
         } else {
+
             console.log('Successfully inserted movie into db');
+            body.credits.crew.forEach(function(entry){
+        if(entry.job ==='Director'){
+          directors.push(entry.name);
+        }
+      })
+            director=directors.join(',');
+
             var moviedetails = {
                 id : body.id,
-                name : body.title,
+                name : body.original_title,
                 posterpath : fullposterpath,
                 release : body.release_date,
-                overview : body.overview
+                overview : body.overview,
+                director: director
+
             };
             console.log('Returning ---> '+JSON.stringify(moviedetails));
             res.send(JSON.stringify(moviedetails));
@@ -101,8 +113,8 @@ function savemoviedetails(body, res){
     });
 }
 
-function tmdbquerybyid(movieid, res){
-    var tmdbreq = http.request(getMovieDetailsOptions(movieid), function(tmdbres){
+function tmdbquerybyid(movie_id, res){
+    var tmdbreq = http.request(getMovieDetailsOptions(movie_id), function(tmdbres){
         var chunks = [];
         
         tmdbres.on('data', function(chunk){
@@ -242,7 +254,7 @@ app.get('/get-movie-details', function(req, res){
             res.status(500).send(err.toString());
         }
         else if(result.rows.length === 0) {
-            tmdbquerybyid(movieid, res);
+            tmdbquerybyid(movieid,res);
         }
         else{
             res.send(JSON.stringify(result.rows[0]));
@@ -250,6 +262,7 @@ app.get('/get-movie-details', function(req, res){
     });
 
 });
+
 
 
 function hash (input, salt) {
@@ -343,9 +356,6 @@ app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
-app.get('/ui/write-review.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'write-review.css'));
-});
 
 app.get('/write-review', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'write-review.html'));
@@ -355,9 +365,6 @@ app.get('/ui/write-review.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'write-review.js'));
 });
 
-app.get('/ui/dark.jpg', function(req, res){
-  res.sendFile(path.join(__dirname, 'ui', 'dark.jpg'));
-});
 
 app.get('/register', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'register.html'));
