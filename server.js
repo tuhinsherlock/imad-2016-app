@@ -119,7 +119,7 @@ function savemoviedetails(body, res){
                 director : dbdirector,
                 cast : dbcast,
                 overview : body.overview,
-                posterpath : getFullPosterPath(body.poster_path, 'poster');
+                posterpath : getFullPosterPath(body.poster_path, 'poster')
             };
             console.log('Returning ---> '+JSON.stringify(moviedetails));
             res.send(JSON.stringify(moviedetails));
