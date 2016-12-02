@@ -159,7 +159,9 @@ app.get('/get-review-details',function(req, res) {
 
     var review_id = req.query.id;
     console.log("Review Id: "+review_id);
-    pool.query('SELECT "content".userid, "content".movieid, "content".date, "content".review, "movie".name AS moviename, "movie".posterpath, "movie".release, "movie".overview, "user".username FROM "content","user","movie" WHERE "content".id = $1 AND "content".userid = "user".id AND "content".movieid = "movie".id',
+    pool.query('SELECT "content".userid, "content".movieid, "content".date, "content".review, "movie".name AS moviename,'+
+                      '"movie".posterpath, "movie".release, "movie".overview, "user".username FROM "content","user","movie"'+
+                      'WHERE "content".id = $1 AND "content".userid = "user".id AND "content".movieid = "movie".id',
                 [review_id], function (err, result) {
         if (err) 
         {
@@ -174,6 +176,7 @@ app.get('/get-review-details',function(req, res) {
         else 
         {
             var review_details = result.rows[0];
+            review_details.posterpath = getFullPosterPath(review_details.posterpath);
             console.log('Fetched review ---> '+JSON.stringify(review_details));
 
             res.send(JSON.stringify(result.rows[0]));
@@ -237,13 +240,24 @@ app.post('/submit-review', function(req,res) {
         var movieid = parseInt(body.movieid);   
         var reviewcon = body.reviewcon;
         console.log('submit-review ---> '+userid+' '+movieid+' '+reviewcon);
-        pool.query('INSERT INTO "content" (userid, movieid, date, review) VALUES ($1, $2, $3, $4) RETURNING id', [userid, movieid, new Date(), reviewcon], function (err, result) {
+
+        pool.query('UPDATE "user" SET totalreviews=totalreviews+1 where id=$1', [userid], function(err, result){
+            if(err){
+                console.log(err.toString());
+                res.status(500).send(err.toString());
+            }
+            else{
+                console.log('Updated totalreviews');
+            }
+        });
+
+        pool.query('INSERT INTO "content" (userid, movieid, date, review) VALUES ($1, $2, $3, $4) RETURNING id',
+                    [userid, movieid, new Date(), reviewcon], function (err, result) {
             if (err) {
                 console.log(err.toString());
                 res.status(500).send(err.toString());
             } else {
                 console.log('Successfully inserted review into db');
-
                 res.send(JSON.stringify({redirect: '/review?id='+result.rows[0].id}));
                 
             }
@@ -299,7 +313,8 @@ app.post('/create-user', function (req, res) {
    var email = req.body.email;
    var salt = crypto.randomBytes(128).toString('hex');
    var dbString = hash(password, salt);
-   pool.query('INSERT INTO "user" (username, password, name, email) VALUES ($1, $2, $3, $4)', [username, dbString, name, email], function (err, result) {
+   pool.query('INSERT INTO "user" (username, password, name, email, datejoined) VALUES ($1, $2, $3, $4, $5)',
+              [username, dbString, name, email, new Date()], function (err, result) {
       if (err) {
           res.status(500).send(err.toString());
       } else {
