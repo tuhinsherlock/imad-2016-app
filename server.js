@@ -57,8 +57,11 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-function getFullPosterPath(posterpath){
-    return tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][2]+posterpath;
+function getFullPosterPath(posterpath, type){
+    if(type=='poster')
+        return tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][2]+posterpath;
+    else if(type=='logo')
+        return tmdbconfig['images']['base_url']+tmdbconfig['images']['logo_sizes'][0]+posterpath;
 }
 
 function getSearchRequestOptions(movie_name){
@@ -151,7 +154,25 @@ function tmdbquerybyid(movieid, res){
 }
 
 app.get('/get-recent', function(req, res){
-    pool.query('SELECT content.id as reviewid, content.userid, "user".name', content.movieid)
+    pool.query('SELECT content.id as reviewid, content.userid, content.date, "user".username, content.movieid, movie.name as moviename, '+
+               'movie.posterpath FROM content, "user", movie WHERE content.userid = "user".id AND content.movieid = movie.id '+
+               'ORDER BY content.date DESC LIMIT 20', function(err, result){
+        if(err){
+            console.log('Error fetching recent '+err.toString());
+            res.status(500).send('Error fetching reviews');
+        }
+        else{
+            var recent_reviews = result.rows;
+            for(var i=0; i<recent_reviews; i++){
+                var posterpath = recent_reviews[i].posterpath;
+                delete recent_reviews[i].posterpath;
+                recent_reviews[i].logopath = getFullPosterPath(posterpath, 'logo');
+            }
+            console.log('Returning ---> '+JSON.stringify(recent_reviews));
+            res.send(JSON.stringify(recent_reviews));
+        }
+    });
+
 });
 
 
@@ -176,7 +197,7 @@ app.get('/get-review-details',function(req, res) {
         else 
         {
             var review_details = result.rows[0];
-            review_details.posterpath = getFullPosterPath(review_details.posterpath);
+            review_details.posterpath = getFullPosterPath(review_details.posterpath, 'poster');
             console.log('Fetched review ---> '+JSON.stringify(review_details));
 
             res.send(JSON.stringify(result.rows[0]));
@@ -284,7 +305,7 @@ app.get('/get-movie-details', function(req, res){
         }
         else{
             var moviedetails = result.rows[0];
-            moviedetails.posterpath = getFullPosterPath(moviedetails.posterpath);
+            moviedetails.posterpath = getFullPosterPath(moviedetails.posterpath, 'poster');
             res.send(JSON.stringify(moviedetails));
         }
     });
