@@ -7,6 +7,7 @@ var movie_name = document.getElementById('movie_name');
 var poster = document.getElementById('poster');
 var year = document.getElementById('year_of_release');
 var desc = document.getElementById('description');
+var cast = document.getElementById('cast');
 var dir = document.getElementById('director');
 
 var response;
@@ -23,7 +24,7 @@ request1.onreadystatechange = function(){
 			poster.src = response["posterpath"];
 			year.innerHTML = response["release"];
 			desc.innerHTML = response["overview"];
-			
+			cast.innerHTML=response["cast"];
 			dir.innerHTML = response["director"];
 		}
 		else

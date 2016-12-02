@@ -57,6 +57,10 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+function getFullPosterPath(posterpath){
+    return tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][2]+posterpath;
+}
+
 function getSearchRequestOptions(movie_name){
     var options = {
       "method": "GET",
@@ -71,7 +75,7 @@ function getSearchRequestOptions(movie_name){
 function getMovieDetailsOptions(movie_id){
     var options = {
       "method": "GET",
-      "hostname": "th",
+      "hostname": "api.themoviedb.org",
       "port": null,
       "path": "/3/movie/"+movie_id+"?api_key="+api_key+"&append_to_response=credits",
       "headers": {}
@@ -80,32 +84,39 @@ function getMovieDetailsOptions(movie_id){
 }
 
 function savemoviedetails(body, res){
-   var directors=[];
-   var director;
-    var fullposterpath = tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][0]+body.poster_path;
-    pool.query('INSERT into "movie" (id, name, posterpath, release, overview) VALUES ($1, $2, $3, $4, $5)',
-                [body.id, body.original_title, fullposterpath, body.release_date, body.overview], function (err, result) {
+
+    var cast = body.credits.cast.slice(0, 7);
+    var dbcast = [];
+    for(var j=0; j<cast.length; j++)
+        dbcast.push(cast[j].name);
+    dbcast = dbcast.join(', ');
+
+    var crew = body.credits.crew;
+    var dbdirector = [];
+    for(var j=0; j<crew.length; j++)
+        if(crew[j].job=="Director")
+            dbdirector.push(crew[j].name);
+    dbdirector = dbdirector.join(', ');
+
+    console.log(dbcast);
+    console.log(dbdirector);
+
+    pool.query('INSERT into "movie" (id, name, release, director, "cast", posterpath, overview) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+                [body.id, body.title, body.release_date, dbdirector, dbcast, body.poster_path, body.overview], function (err, result) {
         if (err) {
+            console.log('DB insertion error');
             console.log(err.toString());
             res.status(500).send(err.toString());
         } else {
-
             console.log('Successfully inserted movie into db');
-            body.credits.crew.forEach(function(entry){
-        if(entry.job ==='Director'){
-          directors.push(entry.name);
-        }
-      })
-            director=directors.join(',');
-
             var moviedetails = {
                 id : body.id,
-                name : body.original_title,
-                posterpath : fullposterpath,
+                name : body.title,
                 release : body.release_date,
+                director : dbdirector,
+                cast : dbcast,
                 overview : body.overview,
-                director: director
-
+                posterpath : getFullPosterPath(body.poster_path)
             };
             console.log('Returning ---> '+JSON.stringify(moviedetails));
             res.send(JSON.stringify(moviedetails));
@@ -113,8 +124,8 @@ function savemoviedetails(body, res){
     });
 }
 
-function tmdbquerybyid(movie_id, res){
-    var tmdbreq = http.request(getMovieDetailsOptions(movie_id), function(tmdbres){
+function tmdbquerybyid(movieid, res){
+    var tmdbreq = http.request(getMovieDetailsOptions(movieid), function(tmdbres){
         var chunks = [];
         
         tmdbres.on('data', function(chunk){
@@ -194,15 +205,15 @@ app.get('/get-search-results', function(req, res){
                 var results = body["results"].slice(0, 5);   //return max 5 results
                 var results1 = [];
                 for(var i=0; i<results.length; i++){
-                  var movie_details = {
-                      movie_name : results[i].title,
-                      id : results[i].id,
-                      poster_path : tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][0]+results[i].poster_path,
-                      logo : tmdbconfig['images']['base_url']+tmdbconfig['images']['logo_sizes'][0]+results[i].poster_path,
-                      release_date : results[i].release_date.split('-')[0],
-                      overview : body.overview
-                  }
-                  results1.push(movie_details);
+                    var movie_details = {
+                        name : results[i].title,
+                        id : results[i].id,
+                        poster_path : tmdbconfig['images']['base_url']+tmdbconfig['images']['poster_sizes'][0]+results[i].poster_path,
+                        logo : tmdbconfig['images']['base_url']+tmdbconfig['images']['logo_sizes'][0]+results[i].poster_path,
+                        release : results[i].release_date.split('-')[0],
+                        overview : body.overview
+                    }
+                    results1.push(movie_details);
                 }
                 console.log("results = "+results1);
                 res.send(JSON.stringify(results1));
@@ -227,12 +238,13 @@ app.post('/submit-review', function(req,res) {
         var reviewcon = body.reviewcon;
         console.log('submit-review ---> '+userid+' '+movieid+' '+reviewcon);
         pool.query('INSERT INTO "content" (userid, movieid, date, review) VALUES ($1, $2, $3, $4) RETURNING id', [userid, movieid, new Date(), reviewcon], function (err, result) {
-                if (err) {
-                    console.log(err.toString());
-                    res.status(500).send(err.toString());
-                } else {
-                    console.log('Successfully inserted review into db');
-                    res.send(JSON.stringify({redirect: '/review?id='+result.rows[0].id}));
+            if (err) {
+                console.log(err.toString());
+                res.status(500).send(err.toString());
+            } else {
+                console.log('Successfully inserted review into db');
+
+                res.send(JSON.stringify({redirect: '/review?id='+result.rows[0].id}));
                 
             }
         });
@@ -254,15 +266,16 @@ app.get('/get-movie-details', function(req, res){
             res.status(500).send(err.toString());
         }
         else if(result.rows.length === 0) {
-            tmdbquerybyid(movieid,res);
+            tmdbquerybyid(movieid, res);
         }
         else{
-            res.send(JSON.stringify(result.rows[0]));
+            var moviedetails = result.rows[0];
+            moviedetails.posterpath = getFullPosterPath(moviedetails.posterpath);
+            res.send(JSON.stringify(moviedetails));
         }
     });
 
 });
-
 
 
 function hash (input, salt) {
@@ -356,6 +369,9 @@ app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
+app.get('/ui/write-review.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'write-review.css'));
+});
 
 app.get('/write-review', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'write-review.html'));
@@ -365,6 +381,9 @@ app.get('/ui/write-review.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'write-review.js'));
 });
 
+app.get('/ui/dark.jpg', function(req, res){
+  res.sendFile(path.join(__dirname, 'ui', 'dark.jpg'));
+});
 
 app.get('/register', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'register.html'));

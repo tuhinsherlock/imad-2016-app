@@ -23,6 +23,7 @@
         var password = document.getElementById('password');
         var name = document.getElementById('name');
         var email = document.getElementById('email');
+        //var img=document.getElementById('pic').files[0];
 
         var unamev = username.value;
         var passv = password.value;
@@ -48,8 +49,6 @@
 
         if(unamev && passv && namev && emailv)
         {
-          console.log(username);
-          console.log(password);
           request.open('POST', '/create-user');
           request.setRequestHeader('Content-Type', 'application/json');
           request.send(JSON.stringify({username: unamev, password: passv, name:namev, email:emailv}));  

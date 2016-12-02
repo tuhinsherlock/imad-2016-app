@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=News+Cycle|Rokitt|Signika+Negative');
 /*.text-details {
 	background : #232323;
 	height: 60px;
@@ -11,16 +12,23 @@ html {
   background-size: cover;
 }
 
+h3{
+	font-size: 25px;
+	font-weight: bolder;
+}
+
 .text-details {
-	margin-top: 20px;
+	margin-top: 5px;
 	margin-right: 20px;
 	color: white;
+	font-size:18px;
 }
+
 .text-details li {
 	float: left;
 	list-style-type: none;
 	position: relative;
-
+	font-family: 'Signika Negative', sans-serif;
 }
 
 .poster {
@@ -30,11 +38,13 @@ html {
 
 textarea{
 	margin-top: 5px;
+	font-family: 'News Cycle', sans-serif;
 	width: 800px;
 	height: 400px;
 	font-weight: bold;
 	background-color: rgba(255, 255, 255, 0.2);
 	color: white;
+	top:30%;
 }
 
 .submit-review

@@ -238,12 +238,13 @@ app.post('/submit-review', function(req,res) {
         var reviewcon = body.reviewcon;
         console.log('submit-review ---> '+userid+' '+movieid+' '+reviewcon);
         pool.query('INSERT INTO "content" (userid, movieid, date, review) VALUES ($1, $2, $3, $4) RETURNING id', [userid, movieid, new Date(), reviewcon], function (err, result) {
-                if (err) {
-                    console.log(err.toString());
-                    res.status(500).send(err.toString());
-                } else {
-                    console.log('Successfully inserted review into db');
-                    res.send(JSON.stringify({redirect: '/review?id='+result.rows[0].id}));
+            if (err) {
+                console.log(err.toString());
+                res.status(500).send(err.toString());
+            } else {
+                console.log('Successfully inserted review into db');
+
+                res.send(JSON.stringify({redirect: '/review?id='+result.rows[0].id}));
                 
             }
         });

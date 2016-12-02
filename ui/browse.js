@@ -24,7 +24,7 @@ search_box.onkeyup = function(){
 				for (var i = 0; i < response.length; i++) {
 					results += '<li><a href="/write-review?movieid='+response[i].id+'">';
 					results += '<img src="'+response[i].logo+'">';
-					results += '&emsp;&emsp;&emsp;'+response[i].movie_name+' ( '+response[i].release_date+' )';
+					results += '&emsp;&emsp;&emsp;'+response[i].name+' ( '+response[i].release+' )';
 					results += '</a> </li>';
 				}
 				//results += '</ul>';
