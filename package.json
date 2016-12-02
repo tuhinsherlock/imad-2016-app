@@ -15,6 +15,7 @@
     "crypto": "*",
     "pg": "*",
     "express-session": "*",
-    "Promise":"*"
+    "Promise":"*",
+    "sprintf-js": "*"
   }
 }

@@ -1,11 +1,13 @@
 var express = require('express');
 var morgan = require('morgan');
+var fs = require('fs');
 var path = require('path');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var http = require('https');
+var sprintf = require('sprintf-js').sprintf;
 
 var pgdbconfig = {
     user: 'tuhinsherlock',
@@ -175,16 +177,37 @@ app.get('/get-recent', function(req, res){
 
 });
 
-
 app.get('/users/:username', function(req, res){
 
     var uname = req.params.username;
-    console.log('/users/'+uname);
+    console.log('uname='+uname);
 
+    var filepath = path.join(__dirname, 'ui', 'user.html');
+    fs.readFile(filepath, {encoding: 'utf-8'}, function(err, data){
+        if(err){
+            console.log('Error opening file '+err);
+        }
+        else{
+            var template = data;
+            console.log('Loaded ---> '+data);
 
+            pool.query('SELECT id, username, name, datejoined, totalreviews FROM "user" WHERE username = $1', [uname], function(err, result){
+                if(err){
+                    console.log('Error fetching user details '+err);
+                    res.status(500).send('Error fetching user details');
+                }
+                else{
+                    var user_details = result.rows[0];
+                    console.log(user_details.totalreviews.toString());
+                    var html = sprintf(template, uname, user_details.name, user_details.datejoined, user_details.totalreviews.toString());
+                    console.log('Returning ---> '+html);
+                    res.send(html);
+                }
+            });
+        }
+    });
 
-});
-
+})
 
 app.get('/get-review-details',function(req, res) {
 
