@@ -119,7 +119,7 @@ function savemoviedetails(body, res){
                 director : dbdirector,
                 cast : dbcast,
                 overview : body.overview,
-                posterpath : getFullPosterPath(body.poster_path)
+                posterpath : getFullPosterPath(body.poster_path, 'poster');
             };
             console.log('Returning ---> '+JSON.stringify(moviedetails));
             res.send(JSON.stringify(moviedetails));
@@ -172,6 +172,16 @@ app.get('/get-recent', function(req, res){
             res.send(JSON.stringify(recent_reviews));
         }
     });
+
+});
+
+
+app.get('/users/:username', function(req, res){
+
+    var uname = req.params.username;
+    console.log('/users/'+uname);
+
+
 
 });
 
