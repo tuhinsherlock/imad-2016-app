@@ -182,7 +182,7 @@ app.get('/get-review-details',function(req, res) {
     var review_id = req.query.id;
     console.log("Review Id: "+review_id);
     pool.query('SELECT "content".userid, "content".movieid, "content".date, "content".review, "movie".name AS moviename,'+
-                      '"movie".posterpath, "movie".release, "movie".overview, "user".username FROM "content","user","movie"'+
+                      '"movie".posterpath, "movie".release, "movie".overview, "movie".director, "movie".cast, "user".username FROM "content","user","movie"'+
                       'WHERE "content".id = $1 AND "content".userid = "user".id AND "content".movieid = "movie".id',
                 [review_id], function (err, result) {
         if (err) 

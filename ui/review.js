@@ -11,7 +11,6 @@ var date = document.getElementById('date');
 var review = document.getElementById('review');
 var director=document.getElementById('director');
 var cast=document.getElementById('cast');
-var movie_name_title=document.getElementById('movie_name_title')
 
 var response;
 

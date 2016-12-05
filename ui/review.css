@@ -14,7 +14,7 @@ html {
 
 h3{
 	font-size: 25px;
-	font-weight: bolder;
+	font-weight: bold;
 	font-family: 'Montserrat', sans-serif;
 }
 
@@ -42,10 +42,10 @@ h3{
 	font-family: 'Montserrat', sans-serif;
 	width: auto;
 	height: auto;
-	
+	padding:15px;
 	background-color: #1f7f5c;
 	color: white;
-	top:40%;
+	top:45%;
 	margin-right:20px;
 	position: relative;
 
