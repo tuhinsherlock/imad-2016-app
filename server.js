@@ -457,6 +457,10 @@ app.get('/ui/write-review.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'write-review.css'));
 });
 
+app.get('/ui/review.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'review.css'));
+});
+
 app.get('/write-review', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'write-review.html'));
 });

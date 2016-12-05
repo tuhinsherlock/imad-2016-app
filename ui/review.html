@@ -1,30 +1,55 @@
 <html>
 <head>
 <title id = "review_title"> 
-Review for 
+Review
 </title>
+<link href = "/ui/review.css" rel ="stylesheet" type = "text/css" />
+	<link href = "/ui/bootstrap.css" rel = "stylesheet" />
+	<link href = "http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet" />
 </head>
 <body> 
-<div class = "movie_name" id = "movie_name">
+<div class = "col-sm-3">
+	<div class = "poster">
+		<img src = "" id = "poster">
+	</div>
 </div>
-<div class = "poster">
-<img src = "" id = "poster">
-</div>
-<div class = "year_of_release" id = "year_of_release">
-</div>
-<div class = "description" id = "description">
-</div>
-<br>
-<br>
-Review Written by
-<div class = "username" id = "username">
-</div>
-on
-<div class = "date" id = "date">
-</div>
-<br>
-<div class = "review" id = "review">
-</div>
+
+<div class = "col-sm-9">
+
+<ul class="text-details">
+<h3><div class = "movie_name" id = "movie_name"></div></h3>
+<li>
+			Directed by: &nbsp; &nbsp; <span class = "director" id = "director"></span>
+			
+			
+		</li>
+		
+		<br>
+		<li>
+		
+			Released on: &nbsp; &nbsp;<span class = "year_of_release" id = "year_of_release"></span>
+			
+		</li>
+		<br>
+		<li>
+		
+			Cast: &nbsp;&nbsp;<span class = "cast" id = "cast"></span>
+			
+			
+		</li>
+		<br>
+		<li>
+		
+			Review written by &nbsp; &nbsp;<span class = "username" id = "username"></span> on <span class = "date" id = "date"></span>
+			
+		</li>
+		<br>
+		<li>
+		<div class = "review" id = "review">
+		</div>
+		</li>
+		</div>
+	</ul>
 <script type = "text/javascript" src = "/ui/review.js">
 </script>
 </body>

@@ -9,6 +9,9 @@ var desc = document.getElementById('description');
 var username= document.getElementById('username');
 var date = document.getElementById('date');
 var review = document.getElementById('review');
+var director=document.getElementById('director');
+var cast=document.getElementById('cast');
+var movie_name_title=document.getElementById('movie_name_title')
 
 var response;
 
@@ -22,10 +25,12 @@ request.onreadystatechange = function(){
 			movie_name.innerHTML = response["moviename"];
 			poster.src = response["posterpath"];
 			year.innerHTML = response["release"];
-			desc.innerHTML = response["overview"];
+			cast.innerHTML=response["cast"];
+			director.innerHTML=response["director"];
 			username.innerHTML = response["username"];
 			date.innerHTML = response["date"];
 			review.innerHTML = response["review"];	
+			movie_name_title.innerHTML = response["moviename"];
 		}
 		else
 		console.log("Error");
