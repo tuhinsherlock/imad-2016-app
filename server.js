@@ -177,37 +177,6 @@ app.get('/get-recent', function(req, res){
 
 });
 
-app.get('/users/:username', function(req, res){
-
-    var uname = req.params.username;
-    console.log('uname='+uname);
-
-    var filepath = path.join(__dirname, 'ui', 'user.html');
-    fs.readFile(filepath, {encoding: 'utf-8'}, function(err, data){
-        if(err){
-            console.log('Error opening file '+err);
-        }
-        else{
-            var template = data;
-            console.log('Loaded ---> '+data);
-
-            pool.query('SELECT id, username, name, datejoined, totalreviews FROM "user" WHERE username = $1', [uname], function(err, result){
-                if(err){
-                    console.log('Error fetching user details '+err);
-                    res.status(500).send('Error fetching user details');
-                }
-                else{
-                    var user_details = result.rows[0];
-                    console.log(user_details.totalreviews.toString());
-                    var html = sprintf(template, uname, user_details.name, user_details.datejoined, user_details.totalreviews.toString());
-                    console.log('Returning ---> '+html);
-                    res.send(html);
-                }
-            });
-        }
-    });
-
-})
 
 app.get('/get-review-details',function(req, res) {
 
@@ -234,6 +203,52 @@ app.get('/get-review-details',function(req, res) {
             console.log('Fetched review ---> '+JSON.stringify(review_details));
 
             res.send(JSON.stringify(result.rows[0]));
+
+        }
+    });
+});
+
+app.get('/get-user-details',function(req, res) {
+
+    var username = req.query.username;
+    console.log("GET USER DETAILS Username: "+username);
+
+    pool.query('SELECT id,name,datejoined,totalreviews FROM "user" WHERE username=$1',[username],function (err, result) {
+        if (err) 
+        {
+            res.status(500).send(err.toString());
+            console.log(err.toString());
+        } 
+        else if(result.rows.length==0){
+            console.log('No such user');
+            res.status(404).send('No such user');
+        }
+        else 
+        {
+            var userdetails = result.rows[0];
+
+            console.log('received user table -> ' + userdetails);
+            pool.query('SELECT content.id AS contentid, content.movieid, movie.name AS moviename, content.date,'+ 
+                'content.review, movie.posterpath FROM "content", movie WHERE content.userid=$1 AND movie.id=content.movieid'
+                ,[userdetails.id],function (err, result1) {
+                    if(err)
+                    {
+                        res.status(500).send(err.toString());
+                        console.log(err.toString());
+                    }
+                    else
+                    {
+                        var reviews = result1.rows;
+                        for(var i=0; i<reviews.length; i++){
+                            reviews[i].logo = getFullPosterPath(reviews[i].posterpath, 'logo');
+                            delete reviews[i].posterpath;
+                        }
+                        userdetails.userreviews=reviews;
+
+                        console.log('RETURNING ----> '+JSON.stringify(userdetails));
+                        res.send(JSON.stringify(userdetails));
+                    }
+            });
 
         }
     });
@@ -471,10 +486,17 @@ app.get('/review', function(req, res){
     res.sendFile(path.join(__dirname, 'ui', 'review.html'));
 });
 
+app.get('/users/:username', function(req, res){
+    res.sendFile(path.join(__dirname, 'ui', 'user.html'));
+});
+
 app.get('/ui/review.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'review.js'));
 });
 
+app.get('/ui/user.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'user.js'));
+});
 
 app.get('/browse', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'browse.html'));
@@ -488,6 +510,9 @@ app.get('/ui/browse.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'browse.css'));
 });
 
+app.get('/ui/user.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'user.css'));
+});
 
 app.get('/recent', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'recent.html'));
