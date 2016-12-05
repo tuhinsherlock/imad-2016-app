@@ -7,7 +7,6 @@ var crypto = require('crypto');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var http = require('https');
-var sprintf = require('sprintf-js').sprintf;
 
 var pgdbconfig = {
     user: 'tuhinsherlock',
