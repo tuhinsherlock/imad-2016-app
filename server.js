@@ -199,9 +199,11 @@ app.get('/get-review-details',function(req, res) {
         {
             var review_details = result.rows[0];
             review_details.posterpath = getFullPosterPath(review_details.posterpath, 'poster');
+            review_details.review = review_details.review.replace(new RegExp('\r?\n', 'g'), '<br>');
+            
             console.log('Fetched review ---> '+JSON.stringify(review_details));
 
-            res.send(JSON.stringify(result.rows[0]));
+            res.send(JSON.stringify(review_details));
 
         }
     });
