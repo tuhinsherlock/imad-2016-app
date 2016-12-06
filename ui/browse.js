@@ -38,3 +38,27 @@ search_box.onkeyup = function(){
 	request.open('GET','/get-search-results?term='+search_term);
 	request.send('{}');
 };
+
+var userlink = document.getElementById('userlink');
+var tabbar_username = document.getElementById('tabbar_username');
+
+console.log('ready');
+function loadLogin () {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+            	userlink.href = '/users/'+this.responseText;
+            	tabbar_username.innerHTML = this.responseText;
+            } else {
+                userlink.href = '/';
+                tabbar_username.innerHTML = 'LOG IN or SIGN UP';
+            }
+        }
+    };
+    
+    request.open('GET', '/check-login', true);
+    request.send(null);
+}
+
+loadLogin();

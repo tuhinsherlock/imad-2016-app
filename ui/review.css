@@ -51,4 +51,42 @@ h3{
 
 }
 
+.writerevbutton{
+	color: white;
+	margin-left: 65px;
+	margin-top: 20px;
+	font-weight: bold;
+	font-family: Montserrat, sans-serif;
+	padding: 10px;
+	background : #ef631c;
 
+}
+
+.navi {
+  background: #232323;
+  height: 40px;
+  display: inline-block;
+  width:1300px;
+  position:relative;
+}
+
+.navi li {
+  float: left;
+  list-style-type: none;
+  position: relative;
+  color:white;
+  width:auto;
+  padding: 0 20px;
+  text-decoration: none;
+}
+
+.navi li a {
+  font-size: 16px; 
+  line-height: 35px;
+  float:left;
+  color:white;
+  width:auto;
+  padding: 0 20px;
+  text-decoration: none;
+  font-family: Montserrat, sans-serif;
+}

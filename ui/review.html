@@ -1,17 +1,33 @@
 <html>
 <head>
 <title id = "review_title"> 
-Review
+Loading... | TuhinHub
 </title>
-<link href = "/ui/review.css" rel ="stylesheet" type = "text/css" />
+
 	<link href = "/ui/bootstrap.css" rel = "stylesheet" />
 	<link href = "http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet" />
+	<link href = "/ui/review.css" rel ="stylesheet" type = "text/css" />
 </head>
-<body> 
+<body>
+
+<div class="tab_bar">
+<ul class="navi">
+		
+		<li>
+			<a href="/recent"> RECENT REVIEWS </a>
+		</li>
+		<li>
+			<a href="#" id='userlink'><span id='tabbar_username'>USER</span></a>
+		</li>
+		
+</ul>
+</div>
+
 <div class = "col-sm-3">
 	<div class = "poster">
 		<img src = "" id = "poster">
 	</div>
+	<input type="submit" id= "writerevbutton" class="writerevbutton" value ="Write Your Own Review">
 </div>
 
 <div class = "col-sm-9">
@@ -40,7 +56,7 @@ Review
 		<br>
 		<li>
 		
-			Review written by &nbsp; &nbsp;<span class = "username" id = "username"></span> on <span class = "date" id = "date"></span>
+			Review written by <span class = "username" id = "username"></span> on <span class = "date" id = "date"></span>
 			
 		</li>
 		<br>

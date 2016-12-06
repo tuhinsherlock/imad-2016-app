@@ -230,7 +230,8 @@ app.get('/get-user-details',function(req, res) {
 
             console.log('received user table -> ' + userdetails);
             pool.query('SELECT content.id AS contentid, content.movieid, movie.name AS moviename, content.date,'+ 
-                'content.review, movie.posterpath FROM "content", movie WHERE content.userid=$1 AND movie.id=content.movieid'
+                'content.review, movie.posterpath FROM "content", movie WHERE content.userid=$1 AND movie.id=content.movieid '+
+                'ORDER BY content.date DESC'
                 ,[userdetails.id],function (err, result1) {
                     if(err)
                     {
@@ -429,7 +430,7 @@ app.post('/login', function (req, res) {
 app.get('/check-login', function (req, res) {
    if (req.session && req.session.auth && req.session.auth.userId) {
        // Load the user object
-       pool.query('SELECT * FROM "user" WHERE id = $1', [req.session.auth.userId], function (err, result) {
+       pool.query('SELECT username FROM "user" WHERE id = $1', [req.session.auth.userId], function (err, result) {
            if (err) {
               res.status(500).send(err.toString());
            } else {
