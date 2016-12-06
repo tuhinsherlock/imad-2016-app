@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=News+Cycle|Rokitt|Signika+Negative');
+@import url('https://fonts.googleapis.com/css?family=News+Cycle|Rokitt|Signika+Negative|Montserrat');
 /*.text-details {
 	background : #232323;
 	height: 60px;
 	display: inline-block;
 }*/
 html { 
-  background: url('/ui/dark.jpg') no-repeat center center fixed; 
+  background: #232323 no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -15,6 +15,35 @@ html {
 h3{
 	font-size: 25px;
 	font-weight: bolder;
+}
+
+.navi {
+  background: #1f7f5c;
+  height: 40px;
+  display: inline-block;
+  width:1300px;
+  position:relative;
+}
+
+.navi li {
+  float: left;
+  list-style-type: none;
+  position: relative;
+  color:white;
+  width:auto;
+  padding: 0 20px;
+  text-decoration: none;
+}
+
+.navi li a {
+  font-size: 16px; 
+  line-height: 35px;
+  float:left;
+  color:white;
+  width:auto;
+  padding: 0 20px;
+  text-decoration: none;
+  font-family: Montserrat, sans-serif;
 }
 
 .text-details {
@@ -42,7 +71,7 @@ textarea{
 	width: 800px;
 	height: 400px;
 	font-weight: bold;
-	background-color: rgba(255, 255, 255, 0.2);
+	background-color: rgba(255, 255, 255,0.2);
 	color: white;
 	top:30%;
 }

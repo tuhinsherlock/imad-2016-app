@@ -5,13 +5,43 @@
     padding: 0;
 }
 
-html { 
+.mainbody { 
   background: url('http://www.wallpapers4u.org/wp-content/uploads/quentin_tarantino_actor_director_jacket_pistol_pants_celebrity_hollywood_black_and_white_18775_1920x1080.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
+
+.navi {
+  background: #232323;
+  height: 40px;
+  display: inline-block;
+  width:1300px;
+  position:relative;
+}
+
+.navi li {
+  float: left;
+  list-style-type: none;
+  position: relative;
+  color:white;
+  width:auto;
+  padding: 0 20px;
+  text-decoration: none;
+}
+
+.navi li a {
+  font-size: 16px; 
+  line-height: 35px;
+  float:left;
+  color:white;
+  width:auto;
+  padding: 0 20px;
+  text-decoration: none;
+  font-family: Montserrat, sans-serif;
+}
+
 
 .search{
      position: absolute;
@@ -29,7 +59,7 @@ html {
 	height: 50px;
 	position: relative;
 	z-index: 2;
-	top: 220px;
+	top: 205px;
 	left: 27%;
     padding: 15px 0 15px 20px;
     font-size: 16px;
@@ -46,12 +76,6 @@ html {
 
 }
 
-.livesearch li a:visited, a:link, a:hover, a:active{
-		color:#FFFFFF;
-		text-decoration: none !important;
-		width:600px;
-		display: inline-block;
-	}
 	
 ::-webkit-input-placeholder { /* WebKit browsers */
     color: white;
@@ -76,7 +100,7 @@ ul{
 .subnav {
 	
 	position: absolute;
-	top: 270px;
+	top: 295px;
 	left:27%;
     width: 600px;
 	height: auto;

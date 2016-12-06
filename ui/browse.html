@@ -1,6 +1,10 @@
 <html>
 <head>
-<style>
+
+<link href = "/ui/browse.css" rel ="stylesheet" />
+	<link href = "/ui/bootstrap.css" rel = "stylesheet" />
+	<link href = "http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet" />
+	<style>
 	.livesearch li a:visited, a:link, a:hover, a:active{
 		color:#FFFFFF;
 		text-decoration: none !important;
@@ -8,11 +12,22 @@
 		display: inline-block;
 	}
 		</style>
-<link href = "/ui/browse.css" rel ="stylesheet" />
-	<link href = "/ui/bootstrap.css" rel = "stylesheet" />
-	<link href = "http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet" />
 		</head>
 <body>
+<div class="tab_bar">
+<ul class="navi">
+		
+		<li>
+			<a href="/recent"> RECENT REVIEWS </a>
+		</li>
+		<li>
+			<a href="#">USER</a>
+		</li>
+		
+</ul>
+</div>
+
+<div class="mainbody">
 <div class="search">
 SEARCH A MOVIE
 </div>
@@ -24,7 +39,7 @@ SEARCH A MOVIE
 <div id = "livesearch">
 </div>
 </ul>
-
+</div>
 <script src="/ui/browse.js" type = "text/javascript"> 
 </script>
 </body>

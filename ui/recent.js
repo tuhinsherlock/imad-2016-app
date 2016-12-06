@@ -1,4 +1,4 @@
-var rec_list = document.getElementById('recent_list');
+var rec_list = document.getElementById('list_reviews');
 
 var request = new XMLHttpRequest();
 request.onreadystatechange = function(){
@@ -9,9 +9,10 @@ request.onreadystatechange = function(){
 			response = JSON.parse(this.responseText);
 			var results = ' ';
 			for (var i = 0; i < response.length; i++) {
-				results += '<li><a href="/review?id='+response[i].reviewid+'">';
+				results += '<li><a href="/review?id='+response[i].reviewid+'"> <div class="col-sm-1"> <img src = "'+response[i].logo+'"></div>';
+				results += '<div class="col-sm-11">';
 				results += response[i].username+' wrote a review on '+response[i].moviename;
-				results += '</a> '+response[i].date+'</li>';
+				results += '<br>on&nbsp;'+response[i].date+'</div></a></li>';
 			}
 			//results += '</ul>';
 			rec_list.innerHTML = results;

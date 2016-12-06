@@ -164,10 +164,10 @@ app.get('/get-recent', function(req, res){
         }
         else{
             var recent_reviews = result.rows;
-            for(var i=0; i<recent_reviews; i++){
+            for(var i=0; i<recent_reviews.length; i++){
                 var posterpath = recent_reviews[i].posterpath;
                 delete recent_reviews[i].posterpath;
-                recent_reviews[i].logopath = getFullPosterPath(posterpath, 'logo');
+                recent_reviews[i].logo = getFullPosterPath(posterpath, 'logo');
             }
             console.log('Returning ---> '+JSON.stringify(recent_reviews));
             res.send(JSON.stringify(recent_reviews));

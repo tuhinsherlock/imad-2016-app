@@ -29,7 +29,7 @@ request.onreadystatechange = function(){
 			username.innerHTML = response["username"];
 			date.innerHTML = response["date"];
 			review.innerHTML = response["review"];	
-			movie_name_title.innerHTML = response["moviename"];
+			
 		}
 		else
 		console.log("Error");
