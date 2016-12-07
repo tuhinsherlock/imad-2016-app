@@ -362,6 +362,35 @@ app.get('/get-movie-details', function(req, res){
 
 });
 
+app.get('/get-reviews-by-movie', function(req, res){
+
+    var movieid = req.query.movieid;
+    console.log('get-reviews-by-movie movieid='+movieid);
+
+    pool.query('SELECT * from movie where id = $1', [movieid], function(err, result){
+        if(err){
+            console.log(err.toString());
+            res.status(500).send('Internal error');
+        }
+        else{
+            var moviedetails = result.rows[0];
+            moviedetails.posterpath = getFullPosterPath(moviedetails.posterpath, 'poster');
+            pool.query('SELECT content.id AS reviewid, content.date, "user".username FROM content, "user" WHERE '+
+                'content.movieid = $1 AND content.userid = "user".id ORDER BY content.date DESC', [movieid], function(err1, result1){
+                if(err1){
+                    console.log(err1.toString());
+                    res.status(500).send('Internal error');           
+                }
+                else{
+                    moviedetails.reviews = result1.rows;
+                    console.log('Returning ---> '+JSON.stringify(moviedetails));
+                    res.send(JSON.stringify(moviedetails));
+                }
+            });
+        }
+    })
+});
+
 
 function hash (input, salt) {
     // How do we create a hash?
@@ -398,6 +427,8 @@ app.post('/login', function (req, res) {
    var username = req.body.username;
    var password = req.body.password;
    
+   console.log('/login '+username+'|'+password);
+
    pool.query('SELECT * FROM "user" WHERE username = $1', [username], function (err, result) {
       if (err) {
           res.status(500).send(err.toString());
@@ -531,6 +562,19 @@ app.get('/ui/recent.js', function(req, res){
 app.get('/ui/recent.css', function(req, res){
   res.sendFile(path.join(__dirname, 'ui', 'recent.css'));
 });
+
+app.get('/movie', function(req, res){
+    res.sendFile(path.join(__dirname, 'ui', 'movie.html'));
+});
+
+app.get('/ui/movie.css', function(req, res){
+    res.sendFile(path.join(__dirname, 'ui', 'movie.css'));
+});
+
+app.get('/ui/movie.js', function(req, res){
+    res.sendFile(path.join(__dirname, 'ui', 'movie.js'));
+});
+
 
 
 app.get('/ui/bootstrap.css', function (req, res) {

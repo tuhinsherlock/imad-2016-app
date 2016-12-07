@@ -1,17 +1,17 @@
-var query = window.location.search;
-var review_id = query.split('=')[1];
-console.log(review_id);
 
-var htmltitle = document.getElementById('review_title')
-var movie_name = document.getElementById('movie_name');
+var query = window.location.search;
+var movieid = query.split('=')[1];
+console.log(movieid);
+
+var htmltitle = document.getElementById('movie_title')
+var moviename = document.getElementById('movie_name');
 var poster = document.getElementById('poster');
 var year = document.getElementById('year_of_release');
 var desc = document.getElementById('description');
-var username= document.getElementById('username');
-var date = document.getElementById('date');
-var review = document.getElementById('review');
 var director=document.getElementById('director');
 var cast=document.getElementById('cast');
+
+var rec_list = document.getElementById('list_reviews');
 
 var writerevbutton = document.getElementById('writerevbutton');
 
@@ -25,19 +25,24 @@ function loadstuff(uname){
 			if(request.status===200){
 				console.log('Received ----> '+this.responseText);
 				response = JSON.parse(this.responseText);
-				movie_name.innerHTML = response["moviename"];
+
+				htmltitle.innerHTML = response.name+' | CineHub';
+
+				moviename.innerHTML = response["name"];
 				poster.src = response["posterpath"];
 				year.innerHTML = response["release"];
 				cast.innerHTML=response["cast"];
 				director.innerHTML=response["director"];
-				username.innerHTML = '<a href="/users/'+response["username"]+'">'+response["username"]+'</a>';
-				date.innerHTML = response["date"];
-				review.innerHTML = response["review"];
+				desc.innerHTML = response.overview;
 
-				htmltitle.innerHTML = response.username+' on '+response.moviename+' | CineHub';
-
-				if(uname==response.username)
-					writerevbutton.value = 'Write another review';
+				var revs = response.reviews;
+				var results = '';
+				for(var i=0; i<revs.length; i++){
+					results += '<li><a href="/review?id='+revs[i].reviewid+'">';
+					results += '<div class="col-sm-11">';
+					results += revs[i].username+' wrote a review on '+revs[i].date+'</div></a></li>';
+				}
+				rec_list.innerHTML = results;
 				
 				writerevbutton.onclick = function(){
 					console.log('Setting Link');
@@ -51,8 +56,8 @@ function loadstuff(uname){
 				console.log("Error");
 		}
 	};
-	console.log('Review.js Review id: ' +review_id);
-	request.open('GET','/get-review-details?id='+review_id);
+	console.log('movie.js movieid: ' +movieid);
+	request.open('GET','/get-reviews-by-movie?movieid='+movieid);
 	request.send('{}');
 }
 
