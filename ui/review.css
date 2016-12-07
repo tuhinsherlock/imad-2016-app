@@ -32,10 +32,16 @@ h3{
 	font-family: 'Montserrat', sans-serif;
 }
 
+.username a{
+	color: #ef631c;
+	text-decoration: none;
+}
+
 .poster {
 	margin-left: 80px;
 	margin-top: 20px;
 }
+
 
 .review{
 	margin-top: 5px;
@@ -53,12 +59,12 @@ h3{
 
 .writerevbutton{
 	color: white;
-	margin-left: 65px;
+	margin-left: 63px;
 	margin-top: 20px;
 	font-weight: bold;
 	font-family: Montserrat, sans-serif;
 	padding: 10px;
-	background : #ef631c;
+	background : #0695a8;
 
 }
 
