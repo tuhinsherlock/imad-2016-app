@@ -22,6 +22,7 @@ function getqueryparams(){
 		pair = pairs[i].split('=');
 		q[pair[0]] = pair[1];
 	}
+	return q;
 }
 qp = getqueryparams();
 var reviewid = qp['id'];

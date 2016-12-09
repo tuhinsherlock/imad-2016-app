@@ -13,6 +13,37 @@ html {
   background-size: cover;
 }
 
+.navi {
+  background: #ef631c;
+  height: 40px;
+  display: inline-block;
+  width:1300px;
+  position:relative;
+}
+
+.navi li {
+  float: left;
+  list-style-type: none;
+  position: relative;
+  color:white;
+  width:auto;
+  background: #ef631c;
+  padding: 0 20px;
+  text-decoration: none;
+}
+
+.navi li a {
+  font-size: 16px; 
+  line-height: 35px;
+  float:left;
+  background: #ef631c;
+  color:white;
+  width:auto;
+  padding: 0 20px;
+  text-decoration: none;
+  font-family: Montserrat, sans-serif;
+}
+
 .recent_rev{
 	top:60px;
 	left:27%;
@@ -45,7 +76,7 @@ html {
 	.recent_list {
 	list-style-type: none;
 	position: absolute;
-	top: 120px;
+	top: 150px;
 	left:20%;
 	height: auto;
 	opacity: 1;
