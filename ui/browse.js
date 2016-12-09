@@ -1,8 +1,19 @@
 var button = document.getElementById('search');
 var search_box = document.getElementById('movie_name');
 var livesearch = document.getElementById('livesearch');
-var keyups = 0;
 
+function getqueryparams(){
+	var q = {}, piece;
+	var wlh = window.location.href.toString();
+	var pairs = wlh.slice(wlh.indexOf('?')+1).split('&');
+	for(var i=0; i<pairs.length; i++){
+		pair = pairs[i].split('=');
+		q[pair[0]] = pair[1];
+	}
+}
+qp = getqueryparams();
+
+var keyups = 0;
 search_box.onkeyup = function(){
 	keyups++;
     var search_term = search_box.value;
@@ -51,7 +62,7 @@ function loadLogin () {
             	userlink.href = '/users/'+this.responseText;
             	tabbar_username.innerHTML = this.responseText;
             } else {
-                userlink.href = '/';
+                userlink.href = '/loginpage?b=0';
                 tabbar_username.innerHTML = 'LOG IN or SIGN UP';
             }
         }

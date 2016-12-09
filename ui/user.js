@@ -1,6 +1,7 @@
 
-var a = window.location.pathname.split('/');
+var a = window.location.href.toString().split('/');
 var usernameurl = a[a.length-1];
+console.log('username='+usernameurl);
 
 var total_reviews = document.getElementById('total_reviews');
 var joined = document.getElementById('joined');
@@ -8,6 +9,7 @@ var uname = document.getElementById('uname');
 //name.innerHTML = 'Kubo';
 var username= document.getElementById('username');
 var reviews= document.getElementById('reviews');
+
 
 var response;
 

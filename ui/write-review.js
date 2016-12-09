@@ -1,7 +1,3 @@
-var query = window.location.search;
-var movie_id = query.split('=')[1];
-var movie_id = query.split('=')[1];
-console.log(movie_id);
 
 var movie_name = document.getElementById('movie_name');
 var poster = document.getElementById('poster');
@@ -10,8 +6,22 @@ var desc = document.getElementById('description');
 var cast = document.getElementById('cast');
 var dir = document.getElementById('director');
 
+
+
+function getqueryparams(){
+	var q = {}, piece;
+	var wlh = window.location.href.toString();
+	var pairs = wlh.slice(wlh.indexOf('?')+1).split('&');
+	for(var i=0; i<pairs.length; i++){
+		pair = pairs[i].split('=');
+		q[pair[0]] = pair[1];
+	}
+}
+qp = getqueryparams();
+var movie_id = qp['movieid'];
+console.log(movieid);
+
 var response;
-var directors=[];
 
 var request1 = new XMLHttpRequest();
 request1.onreadystatechange = function(){
@@ -32,7 +42,7 @@ request1.onreadystatechange = function(){
 	}
 };
 
-request1.open('GET','/get-movie-details?movieid='+movie_id);
+request1.open('GET','/get-movie-details?movieid='+movieid);
 request1.send('{}');
 
 
@@ -59,7 +69,7 @@ submit.onclick = function(){
 	request.setRequestHeader('Content-Type', 'application/json');
 	var reviewObj = {
 						reviewcon: review,
-	 				 	movieid: movie_id
+	 				 	movieid: movieid
 	 				};
 	request.send(JSON.stringify(reviewObj));
 
@@ -79,7 +89,7 @@ function loadLogin () {
             	userlink.href = '/users/'+this.responseText;
             	tabbar_username.innerHTML = this.responseText;
             } else {
-                userlink.href = '/';
+                userlink.href = '/loginpage?wr='+movieid;
                 tabbar_username.innerHTML = 'LOG IN or SIGN UP';
             }
         }

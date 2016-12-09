@@ -433,6 +433,8 @@ app.post('/login', function (req, res) {
    var username = req.body.username;
    var password = req.body.password;
    
+   var prev = req.body.prev;
+
    console.log('/login '+username+'|'+password);
 
    pool.query('SELECT * FROM "user" WHERE username = $1', [username], function (err, result) {
@@ -453,8 +455,10 @@ app.post('/login', function (req, res) {
                 // set cookie with a session id
                 // internally, on the server side, it maps the session id to an object
                 // { auth: {userId }}
-                
-                res.send('credentials correct!');
+
+                var prevurl = getprevurl(prev);
+                console.log('Returning ---> prevurl='+prevurl);
+                res.send(JSON.stringify({message: 'correct credentials', prevurl: prevurl}));
                 
               } else {
                 res.status(403).send('username/password is invalid');
@@ -463,6 +467,25 @@ app.post('/login', function (req, res) {
       }
    });
 });
+
+function getprevurl(prev){
+    var pair = prev.split('=');
+    switch(pair[0]){
+        case 'wr':
+            return '/write-review?movieid='+pair[1];
+        case 'b':
+            return '/browse';
+        case 'm':
+            return '/movie?id='+pair[1];
+        case 'u':
+            return '/users/'+pair[1];
+        case 'rc':
+            return '/recent';
+        case 'rv':
+            return '/review?id='+pair[1];
+    }
+    return '/browse';
+}
 
 app.get('/check-login', function (req, res) {
    if (req.session && req.session.auth && req.session.auth.userId) {
@@ -482,6 +505,11 @@ app.get('/check-login', function (req, res) {
 app.get('/logout', function (req, res) {
    delete req.session.auth;
    res.send('<html><body>Logged out!<br/><br/><a href="/">Back to home</a></body></html>');
+});
+
+
+app.get('/loginpage', function(req, res){
+    res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
 app.get('/ui/main.js', function (req, res) {

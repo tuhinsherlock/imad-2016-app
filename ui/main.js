@@ -1,3 +1,9 @@
+var username = document.getElementById('username');
+var password = document.getElementById('password');
+
+var wls = window.location.search.toString().slice(1);
+console.log('wls='+wls);
+
 
 function loadLoginForm () {
     
@@ -12,7 +18,10 @@ function loadLoginForm () {
           if (request.readyState === XMLHttpRequest.DONE) {
               // Take some action
               if (request.status === 200) {
+                  console.log(this.responseText);
+                  var response = JSON.parse(this.responseText);
                   submit.value = 'Success!';
+                  window.location.href = response.prevurl;
               } else if (request.status === 403) {
                   submit.value = 'Invalid credentials. Try again?';
               } else if (request.status === 500) {
@@ -28,13 +37,15 @@ function loadLoginForm () {
         };
    //hello    
         // Make the request
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-        console.log(username);
-        console.log(password);
-        request.open('POST', '/login', true);
+        var unamev = username.value;
+        var passv = password.value;
+        //console.log(username);
+        //console.log(password);
+        request.open('POST', '/login');
         request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify({username: username, password: password}));  
+        var data = JSON.stringify({username: unamev, password: passv, prev: wls});
+        console.log(data)
+        request.send(data);  
         submit.value = 'Logging in...';
         
     };
@@ -70,5 +81,4 @@ function loadLogin () {
     request.send(null);
 }
 
-// The first thing to do is to check if the user is logged in!
 loadLogin();

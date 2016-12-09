@@ -1,6 +1,3 @@
-var query = window.location.search;
-var review_id = query.split('=')[1];
-console.log(review_id);
 
 var htmltitle = document.getElementById('review_title')
 var movie_name = document.getElementById('movie_name');
@@ -14,6 +11,21 @@ var director=document.getElementById('director');
 var cast=document.getElementById('cast');
 
 var writerevbutton = document.getElementById('writerevbutton');
+
+
+
+function getqueryparams(){
+	var q = {}, piece;
+	var wlh = window.location.href.toString();
+	var pairs = wlh.slice(wlh.indexOf('?')+1).split('&');
+	for(var i=0; i<pairs.length; i++){
+		pair = pairs[i].split('=');
+		q[pair[0]] = pair[1];
+	}
+}
+qp = getqueryparams();
+var reviewid = qp['id'];
+console.log(reviewid);
 
 var response;
 
@@ -44,15 +56,15 @@ function loadstuff(uname){
 					if(uname)
 						window.location.href = '/write-review?movieid='+response.movieid;
 					else
-						window.location.href = '/';
+						window.location.href = '/loginpage?rv='+reviewid;
 				};
 			}
 			else
 				console.log("Error");
 		}
 	};
-	console.log('Review.js Review id: ' +review_id);
-	request.open('GET','/get-review-details?id='+review_id);
+	console.log('Review.js Review id: ' +reviewid);
+	request.open('GET','/get-review-details?id='+reviewid);
 	request.send('{}');
 }
 
@@ -70,7 +82,7 @@ function loadLogin () {
             	tabbar_username.innerHTML = this.responseText;
             	loadstuff(this.responseText);
             } else {
-                userlink.href = '/';
+                userlink.href = '/loginpage?rv='+reviewid;
                 tabbar_username.innerHTML = 'LOG IN or SIGN UP';
                 loadstuff('');
             }

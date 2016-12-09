@@ -1,8 +1,4 @@
 
-var query = window.location.search;
-var movieid = query.split('=')[1];
-console.log(movieid);
-
 var htmltitle = document.getElementById('movie_title')
 var moviename = document.getElementById('movie_name');
 var poster = document.getElementById('poster');
@@ -15,8 +11,20 @@ var rec_list = document.getElementById('list_reviews');
 
 var writerevbutton = document.getElementById('writerevbutton');
 
-var response;
 
+function getqueryparams(){
+	var q = {}, piece;
+	var wlh = window.location.href.toString();
+	var pairs = wlh.slice(wlh.indexOf('?')+1).split('&');
+	for(var i=0; i<pairs.length; i++){
+		pair = pairs.split('=');
+		q[pair[0]] = pair[1];
+	}
+}
+qp = getqueryparams();
+var movieid = qp['id'];
+
+var response;
 function loadstuff(uname){
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
@@ -47,9 +55,9 @@ function loadstuff(uname){
 				writerevbutton.onclick = function(){
 					console.log('Setting Link');
 					if(uname)
-						window.location.href = '/write-review?movieid='+response.movieid;
+						window.location.href = '/write-review?movieid='+movieid;
 					else
-						window.location.href = '/';
+						window.location.href = '/loginpage?m='+movieid;
 				};
 			}
 			else
@@ -75,7 +83,7 @@ function loadLogin () {
             	tabbar_username.innerHTML = this.responseText;
             	loadstuff(this.responseText);
             } else {
-                userlink.href = '/';
+                userlink.href = '/loginpage?m='+movieid;
                 tabbar_username.innerHTML = 'LOG IN or SIGN UP';
                 loadstuff('');
             }
