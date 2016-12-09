@@ -57,7 +57,7 @@ function loadstuff(uname){
 					if(uname)
 						window.location.href = '/write-review?movieid='+response.movieid;
 					else
-						window.location.href = '/loginpage?rv='+reviewid;
+						window.location.href = '/loginpage?wr='+response.movieid;
 				};
 			}
 			else

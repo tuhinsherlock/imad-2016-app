@@ -33,14 +33,10 @@ function loadLoginForm () {
               }
               loadLogin();
           }  
-          // Not done yet
         };
-   //hello    
-        // Make the request
+
         var unamev = username.value;
         var passv = password.value;
-        //console.log(username);
-        //console.log(password);
         request.open('POST', '/login');
         request.setRequestHeader('Content-Type', 'application/json');
         var data = JSON.stringify({username: unamev, password: passv, prev: wls});
@@ -53,7 +49,7 @@ function loadLoginForm () {
     var register = document.getElementById('register_btn');
     
     register.onclick = function() {
-        window.location.href = "/register";
+        window.location.href = '/register?'+wls;
     };
     
 
@@ -65,7 +61,6 @@ function loadLoggedInUser (username) {
 }
 
 function loadLogin () {
-    // Check if the user is already logged in
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.readyState === XMLHttpRequest.DONE) {
@@ -77,7 +72,7 @@ function loadLogin () {
         }
     };
     
-    request.open('GET', '/check-login', true);
+    request.open('GET', '/check-login');
     request.send(null);
 }
 

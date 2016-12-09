@@ -7,7 +7,6 @@ var cast = document.getElementById('cast');
 var dir = document.getElementById('director');
 
 
-
 function getqueryparams(){
 	var q = {}, piece;
 	var wlh = window.location.href.toString();
@@ -28,8 +27,8 @@ var request1 = new XMLHttpRequest();
 request1.onreadystatechange = function(){
 	if(request1.readyState === XMLHttpRequest.DONE){
 		console.log('DONE '+request1.status);
-		if(request1.status===200){
-			console.log('Received ----> '+this.responseText);
+        console.log('Received ----> '+this.responseText);
+		if(this.status===200){
 			var response = JSON.parse(this.responseText);
 			movie_name.innerHTML = response["name"];
 			poster.src = response["posterpath"];
@@ -38,8 +37,12 @@ request1.onreadystatechange = function(){
 			cast.innerHTML=response["cast"];
 			dir.innerHTML = response["director"];
 		}
-		else
-		console.log("Error");
+		else if(this.status==404){
+            var response = JSON.parse(this.responseText);
+            window.location.href = response.redirect;
+        }
+        else
+            console.log("Error");
 	}
 };
 
