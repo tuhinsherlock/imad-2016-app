@@ -25,7 +25,7 @@ function loadstuff(uname){
 			if(request.status===200){
 				console.log('Received ----> '+this.responseText);
 				response = JSON.parse(this.responseText);
-				movie_name.innerHTML = response["moviename"];
+				movie_name.innerHTML = '<a href="/movie?id='+response.movieid+'">'+response["moviename"]+'</a>';
 				poster.src = response["posterpath"];
 				year.innerHTML = response["release"];
 				cast.innerHTML=response["cast"];

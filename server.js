@@ -122,8 +122,7 @@ function savemoviedetails(body, res){
                 overview : body.overview,
                 posterpath : getFullPosterPath(body.poster_path, 'poster')
             };
-            console.log('Returning ---> '+JSON.stringify(moviedetails));
-            res.send(JSON.stringify(moviedetails));
+            getreviewsbymovieid(moviedetails, res);
         }
     });
 }
@@ -350,16 +349,15 @@ app.get('/get-movie-details', function(req, res){
         if (err) {
             res.status(500).send(err.toString());
         }
-        else if(result.rows.length === 0) {
+        /*else if(result.rows.length === 0) {
             tmdbquerybyid(movieid, res);
-        }
+        }*/
         else{
             var moviedetails = result.rows[0];
             moviedetails.posterpath = getFullPosterPath(moviedetails.posterpath, 'poster');
             res.send(JSON.stringify(moviedetails));
         }
     });
-
 });
 
 app.get('/get-reviews-by-movie', function(req, res){
@@ -372,25 +370,33 @@ app.get('/get-reviews-by-movie', function(req, res){
             console.log(err.toString());
             res.status(500).send('Internal error');
         }
+        else if(result.rows.length==0){
+            tmdbquerybyid(movieid, res);
+        }
         else{
             var moviedetails = result.rows[0];
             moviedetails.posterpath = getFullPosterPath(moviedetails.posterpath, 'poster');
-            pool.query('SELECT content.id AS reviewid, content.date, "user".username FROM content, "user" WHERE '+
-                'content.movieid = $1 AND content.userid = "user".id ORDER BY content.date DESC', [movieid], function(err1, result1){
-                if(err1){
-                    console.log(err1.toString());
-                    res.status(500).send('Internal error');           
-                }
-                else{
-                    moviedetails.reviews = result1.rows;
-                    console.log('Returning ---> '+JSON.stringify(moviedetails));
-                    res.send(JSON.stringify(moviedetails));
-                }
-            });
+            getreviewsbymovieid(moviedetails, res);
         }
     })
 });
 
+function getreviewsbymovieid(moviedetails, res){
+    pool.query('SELECT content.id AS reviewid, content.date, "user".username FROM content, "user" WHERE '+
+        'content.movieid = $1 AND content.userid = "user".id ORDER BY content.date DESC', [moviedetails.id], function(err1, result1){
+        if(err1){
+            console.log(err1.toString());
+            res.status(500).send('Internal error');           
+        }
+        else{
+            moviedetails.reviews = result1.rows;
+            moviedetails.movieid = moviedetails.id;
+            delete moviedetails.id;
+            console.log('Returning ---> '+JSON.stringify(moviedetails));
+            res.send(JSON.stringify(moviedetails));
+        }
+    });
+}
 
 function hash (input, salt) {
     // How do we create a hash?
