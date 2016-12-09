@@ -16,9 +16,10 @@ function getqueryparams(){
 		pair = pairs[i].split('=');
 		q[pair[0]] = pair[1];
 	}
+	return q;
 }
-qp = getqueryparams();
-var movie_id = qp['movieid'];
+var qp = getqueryparams();
+var movieid = qp['movieid'];
 console.log(movieid);
 
 var response;

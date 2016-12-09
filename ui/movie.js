@@ -17,11 +17,12 @@ function getqueryparams(){
 	var wlh = window.location.href.toString();
 	var pairs = wlh.slice(wlh.indexOf('?')+1).split('&');
 	for(var i=0; i<pairs.length; i++){
-		pair = pairs.split('=');
+		pair = pairs[i].split('=');
 		q[pair[0]] = pair[1];
 	}
+	return q;
 }
-qp = getqueryparams();
+var qp = getqueryparams();
 var movieid = qp['id'];
 
 var response;

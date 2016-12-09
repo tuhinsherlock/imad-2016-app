@@ -581,6 +581,10 @@ app.get('/ui/browse.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'browse.css'));
 });
 
+app.get('/ui/quentin.jpg', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'quentin.jpg'));
+});
+
 app.get('/ui/user.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'user.css'));
 });

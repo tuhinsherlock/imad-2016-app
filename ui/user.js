@@ -30,10 +30,10 @@ request.onreadystatechange = function(){
 			var results = ' ';
 			for (var i = 0; i < userreviews.length; i++) {
 				results += '<li><a href="/review?id='+userreviews[i].contentid+'">';
-				results += '<img src="'+userreviews[i].logo+'">';
-				results += '&emsp;&emsp;&emsp;'+userreviews[i].moviename;
+				results += '<div class="col-sm-1"><img src="'+userreviews[i].logo+'"></div>';
+				results += '<div class="col-sm-11">'+userreviews[i].moviename;
 				results += '<br> Written on: '+userreviews[i].date;
-				results += '</a> </li>';
+				results += '</div></a> </li>';
 			}
 			//results += '</ul>';
 			reviews.innerHTML = results;
