@@ -2,11 +2,25 @@
 	<head>
 	<title>
 	</title>
-	<link href = "/ui/user.css" rel ="stylesheet" />
 	<link href = "/ui/bootstrap.css" rel = "stylesheet" />
 	<link href = "http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet" />
+	<link href = "/ui/user.css" rel ="stylesheet" />
 	</head>
 	<body>
+
+	<div class="tab_bar">
+	<ul class="navi">
+		
+		<li>
+			<a href="/recent"> RECENT REVIEWS </a>
+		</li>
+		<li>
+			<a href="#" id='userlink'><span id='tabbar_username'>USER</span></a>
+		</li>
+		
+	</ul>
+	</div>
+
 	<ul class="user-details">
 
 		<br>
@@ -31,20 +45,20 @@
 	
 		</li>
 		<br>
-		<br>
 		<li>
 			Total reviews:&nbsp;&nbsp;<span class = "total_reviews" id = "total_reviews"></span>
-			<br>
+			
 		</li>
+		</ul>
+		<div class="recent-rev">REVIEWS WRITTEN BY <span id = "username2"></span></div>
 	
-	</ul>
-
 	<ul class="reviewuser">
 		<div id = "reviews">
 		</div>
 	</ul>
-
-	<script type = "text/javascript" src = "../ui/user.js" >
+	
+	
+	<script type = "text/javascript" src = "/ui/user.js" >
 	</script>
 	</body>
 	</html>

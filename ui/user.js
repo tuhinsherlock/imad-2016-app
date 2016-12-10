@@ -9,6 +9,7 @@ var uname = document.getElementById('uname');
 //name.innerHTML = 'Kubo';
 var username= document.getElementById('username');
 var reviews= document.getElementById('reviews');
+var username2=document.getElementById('username2');
 
 
 var response;
@@ -26,6 +27,7 @@ request.onreadystatechange = function(){
 			console.log('received name = '+response["name"]);
 			joined.innerHTML = response["datejoined"];
 			total_reviews.innerHTML = response["totalreviews"];
+			username2.innerHTML=usernameurl;
 			var userreviews = response.userreviews;
 			var results = ' ';
 			for (var i = 0; i < userreviews.length; i++) {

@@ -1,6 +1,18 @@
 var rec_list = document.getElementById('list_reviews');
 
-function loadstuff(uname) {
+function getqueryparams(){
+	var q = {}, piece;
+	var wlh = window.location.href.toString();
+	var pairs = wlh.slice(wlh.indexOf('?')+1).split('&');
+	for(var i=0; i<pairs.length; i++){
+		pair = pairs[i].split('=');
+		q[pair[0]] = pair[1];
+	}
+	return q;
+}
+
+var qp = getqueryparams();
+
 var request = new XMLHttpRequest();
 request.onreadystatechange = function(){
 	if(request.readyState === XMLHttpRequest.DONE){
@@ -25,7 +37,7 @@ request.onreadystatechange = function(){
 console.log('Getting recent...');
 request.open('GET','/get-recent');
 request.send('{}');
-}
+
 
 var userlink = document.getElementById('userlink');
 var tabbar_username = document.getElementById('tabbar_username');
@@ -39,11 +51,11 @@ function loadLogin () {
             if (request.status === 200) {
             	userlink.href = '/users/'+this.responseText;
             	tabbar_username.innerHTML = this.responseText;
-            	loadstuff(this.responseText);
+
             } else {
                 userlink.href = '/loginpage?rc=0';
                 tabbar_username.innerHTML = 'LOG IN or SIGN UP';
-                loadstuff('');
+               
             }
         }
     };

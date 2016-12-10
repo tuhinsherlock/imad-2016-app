@@ -12,10 +12,13 @@ html {
   background-size: cover;
 }
 
-h3{
+
+h3 a{
 	font-size: 25px;
 	font-weight: bold;
 	font-family: 'Montserrat', sans-serif;
+	font-color : #0000EE;
+	text-decoration: none !important;
 }
 
 .text-details {
@@ -69,10 +72,10 @@ h3{
 }
 
 .navi {
-  background: #232323;
+  background: #ef631c;
   height: 40px;
   display: inline-block;
-  width:1300px;
+  width:100%;
   position:relative;
 }
 
@@ -81,14 +84,16 @@ h3{
   list-style-type: none;
   position: relative;
   color:white;
+  background: #ef631c;
   width:auto;
   padding: 0 20px;
   text-decoration: none;
 }
 
 .navi li a {
-  font-size: 16px; 
-  line-height: 35px;
+  font-size: 16px;
+  background: #ef631c 
+  line-height: 40px;
   float:left;
   color:white;
   width:auto;

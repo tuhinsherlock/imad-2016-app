@@ -10,8 +10,10 @@ function getqueryparams(){
 		pair = pairs[i].split('=');
 		q[pair[0]] = pair[1];
 	}
+	return q;
 }
-qp = getqueryparams();
+
+var qp = getqueryparams();
 
 var keyups = 0;
 search_box.onkeyup = function(){

@@ -7,14 +7,17 @@
 
 html {
   background: #232323;
-
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .navi {
-  background: #0695a8;
+  background: #ef631c;
   height: 40px;
   display: inline-block;
-  width:1300px;
+  width:100%;
   position:relative;
 }
 
@@ -24,7 +27,7 @@ html {
   position: relative;
   color:white;
   width:auto;
-  background: #0695a8;
+  background: #ef631c;
   padding: 0 20px;
   text-decoration: none;
 }
@@ -33,7 +36,7 @@ html {
   font-size: 16px; 
   line-height: 35px;
   float:left;
-  background: #0695a8;
+  background: #ef631c;
   color:white;
   width:auto;
   padding: 0 20px;
@@ -41,17 +44,40 @@ html {
   font-family: Montserrat, sans-serif;
 }
 
-.recent_rev{
-	top:60px;
-	left:27%;
-	position: relative;
-	color:#ef631c;
+.user-details {
+	color: white;
+	font-size:18px;
 	font-family: Montserrat, sans-serif;
-	font-size: 35px;
-	font-weight: bold;
+	position: absolute;
+	top:10px;
+	left:22%;
+	list-style-type: none;
 }
 
-	.recent_list li a:visited, a:link, a:hover, a:active{
+	.recent-rev {
+		color: #0695a8;
+		font-family: Montserrat, sans-serif;
+		font-size : 20px;
+		top:290px;
+		left:22%;
+		position: absolute;
+	}
+
+
+	.reviewuser {
+	list-style-type: none;
+	position: absolute;
+	left:18%;
+	top:320px;
+	height: auto;
+	opacity: 1;
+	transition: all 0.1s;
+	font-size: 18px;
+    font-family: Montserrat, sans-serif;
+    color:white;
+}
+
+	.reviewuser li a:visited, a:link, a:hover, a:active{
 		color:#FFFFFF;
 		text-decoration: none !important;
 		width:800px;
@@ -59,7 +85,7 @@ html {
 
 	}
 
-	.recent_list li{
+	.reviewuser li{
 		color:#FFFFFF;
 		text-decoration: none !important;
 		width:800px;
@@ -70,15 +96,3 @@ html {
 
 	}
 
-	.recent_list {
-	list-style-type: none;
-	position: absolute;
-	top: 150px;
-	left:20%;
-	height: auto;
-	opacity: 1;
-	transition: all 0.1s;
-	font-size: 18px;
-    font-family: Montserrat, sans-serif;
-    color:white;
-}
