@@ -83,6 +83,7 @@ submit.onclick = function(){
 
 var userlink = document.getElementById('userlink');
 var tabbar_username = document.getElementById('tabbar_username');
+var logout = document.getElementById('logout');
 
 console.log('ready');
 function loadLogin () {
@@ -92,6 +93,7 @@ function loadLogin () {
             if (request.status === 200) {
             	userlink.href = '/users/'+this.responseText;
             	tabbar_username.innerHTML = this.responseText;
+            	logout.innerHTML = '<li> <a href="/logout">LOGOUT</a></li>';
             } else {
                 userlink.href = '/loginpage?wr='+movieid;
                 tabbar_username.innerHTML = 'LOG IN or SIGN UP';
