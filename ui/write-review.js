@@ -51,10 +51,10 @@ request1.send('{}');
 
 
 var submit = document.getElementById('submit_btn');
-submit.onclick = function(){
-	
-	var request = new XMLHttpRequest();
 
+submit.onclick = function(){
+
+	var request = new XMLHttpRequest();
 
 	request.onreadystatechange = function(){
 
@@ -68,6 +68,7 @@ submit.onclick = function(){
 	};
 
 	var review = document.getElementById('review').value;
+
 	console.log('POST ---> '+review);
 	request.open('POST','/submit-review',true);
 	request.setRequestHeader('Content-Type', 'application/json');
@@ -77,9 +78,8 @@ submit.onclick = function(){
 	 				};
 	request.send(JSON.stringify(reviewObj));
 
-
-
 };
+
 
 var userlink = document.getElementById('userlink');
 var tabbar_username = document.getElementById('tabbar_username');
