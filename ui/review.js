@@ -44,7 +44,7 @@ function loadstuff(uname){
 				cast.innerHTML=response["cast"];
 				director.innerHTML=response["director"];
 				username.innerHTML = '<a href="/users/'+response["username"]+'">'+response["username"]+'</a>';
-				date.innerHTML = response["date"].split('T')[0];
+				date.innerHTML = response["date"];
 				review.innerHTML = response["review"];
 
 				htmltitle.innerHTML = response.username+' on '+response.moviename+' | CineHub';

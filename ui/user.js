@@ -25,7 +25,7 @@ request.onreadystatechange = function(){
 			username.innerHTML = usernameurl;
 			uname.innerHTML = response["name"];
 			console.log('received name = '+response["name"]);
-			joined.innerHTML = response["datejoined"].split('T')[0];
+			joined.innerHTML = response["datejoined"];
 			total_reviews.innerHTML = response["totalreviews"];
 			username2.innerHTML=usernameurl;
 			var userreviews = response.userreviews;
@@ -34,7 +34,7 @@ request.onreadystatechange = function(){
 				results += '<li><a href="/review?id='+userreviews[i].contentid+'">';
 				results += '<div class="col-sm-1"><img src="'+userreviews[i].logo+'"></div>';
 				results += '<div class="col-sm-11">'+userreviews[i].moviename;
-				results += '<br> Written on: '+userreviews[i].date.split('T')[0];
+				results += '<br> Written on: '+userreviews[i].date;
 				results += '</div></a> </li>';
 			}
 			//results += '</ul>';

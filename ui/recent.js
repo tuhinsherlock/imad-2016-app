@@ -25,7 +25,7 @@ request.onreadystatechange = function(){
 				results += '<li><a href="/review?id='+response[i].reviewid+'"> <div class="col-sm-1"> <img src = "'+response[i].logo+'"></div>';
 				results += '<div class="col-sm-11">';
 				results += response[i].username+' wrote a review on '+response[i].moviename;
-				results += '<br>on&nbsp;'+response[i].date.split('T')[0]+'</div></a></li>';
+				results += '<br>on&nbsp;'+response[i].date+'</div></a></li>';
 			}
 			//results += '</ul>';
 			rec_list.innerHTML = results;

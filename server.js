@@ -165,6 +165,9 @@ app.get('/get-recent', function(req, res){
             var recent_reviews = result.rows;
             for(var i=0; i<recent_reviews.length; i++){
                 var posterpath = recent_reviews[i].posterpath;
+                var d=[];
+                d = recent_reviews[i].date.toString().split(' ');
+                recent_reviews[i].date = d[1]+" "+d[2]+" "+d[3];
                 delete recent_reviews[i].posterpath;
                 recent_reviews[i].logo = getFullPosterPath(posterpath, 'logo');
             }
@@ -198,6 +201,10 @@ app.get('/get-review-details',function(req, res) {
         {
             var review_details = result.rows[0];
             review_details.posterpath = getFullPosterPath(review_details.posterpath, 'poster');
+            var d=[];
+                d = review_details.date.toString().split(' ');
+                review_details.date = d[1]+" "+d[2]+" "+d[3];
+            
             review_details.review = review_details.review.replace(new RegExp('\r?\n', 'g'), '<br>');
             
             console.log('Fetched review ---> '+JSON.stringify(review_details));
@@ -226,7 +233,9 @@ app.get('/get-user-details',function(req, res) {
         else 
         {
             var userdetails = result.rows[0];
-
+            var d=[];
+            d = userdetails.datejoined.toString().split(' ');
+            userdetails.datejoined = d[1]+" "+d[2]+" "+d[3];
             console.log('received user table -> ' + userdetails);
             pool.query('SELECT content.id AS contentid, content.movieid, movie.name AS moviename, content.date,'+ 
                 'content.review, movie.posterpath FROM "content", movie WHERE content.userid=$1 AND movie.id=content.movieid '+
@@ -389,7 +398,15 @@ function getreviewsbymovieid(moviedetails, res){
             res.status(500).send('Internal error');           
         }
         else{
-            moviedetails.reviews = result1.rows;
+            var revs = result1.rows;
+            for(var i=0;i<revs.length;i++)
+            {
+                var d=[];
+            d = revs[i].date.toString().split(' ');
+            revs[i].date = d[1]+" "+d[2]+" "+d[3];
+                
+            }
+            moviedetails.reviews = revs;
             moviedetails.movieid = moviedetails.id;
             delete moviedetails.id;
             console.log('Returning ---> '+JSON.stringify(moviedetails));

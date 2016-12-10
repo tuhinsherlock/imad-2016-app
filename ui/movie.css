@@ -81,25 +81,24 @@ html {
   .reviewuser {
   list-style-type: none;
   position: absolute;
-  top:370px;
+  top:390px;
   height: auto;
   opacity: 1;
   transition: all 0.1s;
   font-size: 18px;
     font-family: Montserrat, sans-serif;
     color:white;
+
 }
 
   .reviewuser li a:visited, a:link, a:hover, a:active{
     color:#FFFFFF;
     text-decoration: none !important;
     width:600px;
-    display: inline-block;
     background: #ef631c;
-     padding-top: 4px;
-    padding-bottom: 4px;
-
   }
+
+  
 
   .reviewuser li{
     color:#FFFFFF;
@@ -107,7 +106,7 @@ html {
     width:600px;
     display: inline-block;
     background: #ef631c;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding:5px;
+    margin-top:5px;
 
 }

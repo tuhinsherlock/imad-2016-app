@@ -48,8 +48,8 @@ function loadstuff(uname){
 				var results = '';
 				for(var i=0; i<revs.length; i++){
 					results += '<li><a href="/review?id='+revs[i].reviewid+'">';
-					results += '<div class="col-sm-11">';
-					results += revs[i].username+' wrote a review on '+revs[i].date.split('T')[0]+'</div></a></li>';
+					results += '';
+					results += revs[i].username+' wrote a review on '+revs[i].date+'</a></li><br><br>';
 				}
 				rec_list.innerHTML = results;
 				
