@@ -18,7 +18,7 @@ html {
   background: #1f7f5c;
   height: 40px;
   display: inline-block;
-  width:1300px;
+  width:100%;
   position:relative;
 }
 
@@ -30,6 +30,7 @@ html {
   width:auto;
   padding: 0 20px;
   text-decoration: none;
+  background: #1f7f5c;
 }
 
 .navi li a {
@@ -41,6 +42,7 @@ html {
   padding: 0 20px;
   text-decoration: none;
   font-family: Montserrat, sans-serif;
+  background: #1f7f5c;
 }
 
 .movie-details {
@@ -62,13 +64,50 @@ html {
   margin-top: 20px;
 }
 
+
+
 .writerevbutton{
   color: white;
-  margin-left: 63px;
+  margin-left: 95px;
   margin-top: 20px;
   font-weight: bold;
   font-family: Montserrat, sans-serif;
   padding: 10px;
   background : #0695a8;
+
+}
+
+
+  .reviewuser {
+  list-style-type: none;
+  position: absolute;
+  top:370px;
+  height: auto;
+  opacity: 1;
+  transition: all 0.1s;
+  font-size: 18px;
+    font-family: Montserrat, sans-serif;
+    color:white;
+}
+
+  .reviewuser li a:visited, a:link, a:hover, a:active{
+    color:#FFFFFF;
+    text-decoration: none !important;
+    width:600px;
+    display: inline-block;
+    background: #ef631c;
+     padding-top: 4px;
+    padding-bottom: 4px;
+
+  }
+
+  .reviewuser li{
+    color:#FFFFFF;
+    text-decoration: none !important;
+    width:600px;
+    display: inline-block;
+    background: #ef631c;
+    padding-top: 4px;
+    padding-bottom: 4px;
 
 }

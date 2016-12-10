@@ -49,7 +49,7 @@ function loadstuff(uname){
 				for(var i=0; i<revs.length; i++){
 					results += '<li><a href="/review?id='+revs[i].reviewid+'">';
 					results += '<div class="col-sm-11">';
-					results += revs[i].username+' wrote a review on '+revs[i].date+'</div></a></li>';
+					results += revs[i].username+' wrote a review on '+revs[i].date.split('T')[0]+'</div></a></li>';
 				}
 				rec_list.innerHTML = results;
 				

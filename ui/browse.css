@@ -60,7 +60,7 @@ html {
 	height: 50px;
 	position: relative;
 	z-index: 2;
-	top: 205px;
+	top: 200px;
 	left: 27%;
     padding: 15px 0 15px 20px;
     font-size: 16px;
@@ -101,7 +101,7 @@ ul{
 .subnav {
 	
 	position: absolute;
-	top: 295px;
+	top: 350px;
 	left:27%;
     width: 600px;
 	height: auto;

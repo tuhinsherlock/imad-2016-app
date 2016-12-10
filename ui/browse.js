@@ -37,7 +37,7 @@ search_box.onkeyup = function(){
 				for (var i = 0; i < response.length; i++) {
 					results += '<li><a href="/movie?id='+response[i].id+'">';
 					results += '<img src="'+response[i].logo+'">';
-					results += '&emsp;&emsp;&emsp;'+response[i].name+' ( '+response[i].release+' )';
+					results += '&emsp;&emsp;'+response[i].name+' ( '+response[i].release+' )';
 					results += '</a> </li>';
 				}
 				//results += '</ul>';
