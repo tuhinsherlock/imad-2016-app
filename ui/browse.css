@@ -119,5 +119,10 @@ ul{
 	border-bottom: 1px solid #2e2e2e;
 }
 
+.tmdb {
+    position:absolute;
+    top:600px;
+    left:5px;
+}
 
 
