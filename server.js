@@ -145,7 +145,7 @@ function tmdbquerybyid(movieid, res){
             }
             else{
                 console.log("ERROR status "+tmdbres.statusCode);
-                res.send('Error'+tmdbres.statusCode);
+                res.status(404).send('Error'+tmdbres.statusCode);
             }
         });
     });

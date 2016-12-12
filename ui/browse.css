@@ -77,6 +77,12 @@ html {
 
 }
 
+.livesearch li a:visited, a:link, a:hover, a:active{
+    color:#FFFFFF;
+    text-decoration: none !important;
+    width:600px;
+    display: inline-block;
+}
 	
 ::-webkit-input-placeholder { /* WebKit browsers */
     color: white;
@@ -103,7 +109,7 @@ ul{
 	position: absolute;
 	top: 350px;
 	left:27%;
-    width: 600px;
+  width: 600px;
 	height: auto;
 	opacity: 1;
 	transition: all 0.1s;

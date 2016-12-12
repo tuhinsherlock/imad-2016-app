@@ -1,11 +1,10 @@
 
-var movie_name = document.getElementById('movie_name');
-var poster = document.getElementById('poster');
-var year = document.getElementById('year_of_release');
-var desc = document.getElementById('description');
-var cast = document.getElementById('cast');
-var dir = document.getElementById('director');
-
+var moviename = document.getElementById('movie_name');
+var poster     = document.getElementById('poster');
+var year       = document.getElementById('year_of_release');
+var desc       = document.getElementById('description');
+var cast       = document.getElementById('cast');
+var dir        = document.getElementById('director');
 
 function getqueryparams(){
 	var q = {}, piece;
@@ -19,9 +18,6 @@ function getqueryparams(){
 }
 var qp = getqueryparams();
 var movieid = qp['movieid'];
-console.log(movieid);
-
-var response;
 
 var request1 = new XMLHttpRequest();
 request1.onreadystatechange = function(){
@@ -30,19 +26,20 @@ request1.onreadystatechange = function(){
         console.log('Received ----> '+this.responseText);
 		if(this.status===200){
 			var response = JSON.parse(this.responseText);
-			movie_name.innerHTML = response["name"];
-			poster.src = response["posterpath"];
-			year.innerHTML = response["release"];
-			desc.innerHTML = response["overview"];
-			cast.innerHTML=response["cast"];
-			dir.innerHTML = response["director"];
+            
+			movie_name.innerHTML = response.name;
+			poster.src           = response.posterpath;
+			year.innerHTML       = response.release;
+			desc.innerHTML       = response.overview;
+			cast.innerHTML       = response.cast;
+			dir.innerHTML        = response.director;
 		}
 		else if(this.status==404){
             var response = JSON.parse(this.responseText);
             window.location.href = response.redirect;
         }
         else
-            console.log("Error");
+            console.log('Error');
 	}
 };
 
@@ -57,13 +54,15 @@ submit.onclick = function(){
 	var request = new XMLHttpRequest();
 
 	request.onreadystatechange = function(){
-
 		if(request.readyState === XMLHttpRequest.DONE){
 			if(request.status === 200){
 				response = JSON.parse(this.responseText);
 				console.log('Review Submitted');
 				window.location.href=response.redirect;
 			}
+            else if(request.status === 403){
+                submit.value = ' You must be logged in to submit a review ';
+            }
 		}
 	};
 
@@ -72,35 +71,31 @@ submit.onclick = function(){
 	console.log('POST ---> '+review);
 	request.open('POST','/submit-review',true);
 	request.setRequestHeader('Content-Type', 'application/json');
-	var reviewObj = {
-						reviewcon: review,
-	 				 	movieid: movieid
-	 				};
+	var reviewObj = {reviewcon: review, movieid: movieid};
 	request.send(JSON.stringify(reviewObj));
-
 };
 
 
-var userlink = document.getElementById('userlink');
 var tabbar_username = document.getElementById('tabbar_username');
-var logout = document.getElementById('logout');
+var userlink        = document.getElementById('userlink');
+var logout          = document.getElementById('logout');
 
-console.log('ready');
 function loadLogin () {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
-            	userlink.href = '/users/'+this.responseText;
-            	tabbar_username.innerHTML = this.responseText;
-            	logout.innerHTML = '<li> <a href="/logout">LOGOUT</a></li>';
+                userlink.href = '/users/'+this.responseText;
+                tabbar_username.innerHTML = this.responseText;
+                logout.innerHTML = '<li><a href="/logout">LOGOUT</a></li>';
             } else {
-                userlink.href = '/loginpage?wr='+movieid;
+                userlink.href = '/loginpage?b=0';
                 tabbar_username.innerHTML = 'LOG IN or SIGN UP';
             }
         }
     };
-    
     request.open('GET', '/check-login', true);
     request.send(null);
 }
+
+loadLogin();

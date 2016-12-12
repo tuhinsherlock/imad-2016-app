@@ -1,7 +1,6 @@
 	<html>
 	<head>
-	<title>
-	</title>
+		<title id="htmltitle">Loading... | Cinehub</title>
 	<link href = "/ui/bootstrap.css" rel = "stylesheet" />
 	<link href = "http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet" />
 	<link href = "/ui/user.css" rel ="stylesheet" />
@@ -14,10 +13,11 @@
 		<li>
 			<a href="/recent"> RECENT REVIEWS </a>
 		</li>
-		<li><a href="/browse"> BROWSE MOVIES </a></li>
+		<li> <a href = "/browse"> BROWSE MOVIES </a></li>
 		<li>
-			<a href="#" id='userlink'><span id='tabbar_username'>USER</span></a>
+			<a href="#" id='userlink'><span id='tabbar_username'></span></a>
 		</li>
+		<div id = "logout"></div>
 		
 	</ul>
 	</div>
@@ -36,7 +36,7 @@
 		<br>
 		<li>
 		
-			Name: &nbsp; &nbsp;<span class = "uname" id = "uname"></span>
+			Name: &nbsp; &nbsp;<span class = "name1" id = "name1"></span>
 			
 		</li>
 		<br>
@@ -47,7 +47,7 @@
 		</li>
 		<br>
 		<li>
-			Total reviews:&nbsp;&nbsp;<span class = "total_reviews" id = "total_reviews"></span>
+			Total reviews:&nbsp;&nbsp;<span class = "totalreviews" id = "totalreviews"></span>
 			
 		</li>
 		</ul>

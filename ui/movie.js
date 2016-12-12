@@ -1,16 +1,15 @@
 
-var htmltitle = document.getElementById('movie_title')
+var htmltitle = document.getElementById('htmltitle')
 var moviename = document.getElementById('movie_name');
-var poster = document.getElementById('poster');
-var year = document.getElementById('year_of_release');
-var desc = document.getElementById('description');
-var director=document.getElementById('director');
-var cast=document.getElementById('cast');
+var poster    = document.getElementById('poster');
+var year      = document.getElementById('year_of_release');
+var desc      = document.getElementById('description');
+var director  = document.getElementById('director');
+var cast      = document.getElementById('cast');
 
-var rec_list = document.getElementById('list_reviews');
+var reclist  = document.getElementById('list_reviews');
 
 var writerevbutton = document.getElementById('writerevbutton');
-
 
 function getqueryparams(){
 	var q = {}, piece;
@@ -25,7 +24,6 @@ function getqueryparams(){
 var qp = getqueryparams();
 var movieid = qp['id'];
 
-var response;
 function loadstuff(uname){
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function(){
@@ -33,32 +31,31 @@ function loadstuff(uname){
 			console.log('DONE '+request.status);
 			if(request.status===200){
 				console.log('Received ----> '+this.responseText);
-				response = JSON.parse(this.responseText);
+				var response = JSON.parse(this.responseText);
 
-				htmltitle.innerHTML = response.name+' | CineHub';
+				htmltitle.innerHTML = response.name + ' | CineHub';
 
-				moviename.innerHTML = response["name"];
-				poster.src = response["posterpath"];
-				year.innerHTML = response["release"];
-				cast.innerHTML=response["cast"];
-				director.innerHTML=response["director"];
-				desc.innerHTML = response.overview;
+				moviename.innerHTML = response.name;
+				poster.src          = response.posterpath;
+				year.innerHTML      = response.release;
+				cast.innerHTML      = response.cast;
+				director.innerHTML  = response.director;
+				desc.innerHTML      = response.overview;
 
 				var revs = response.reviews;
 				var results = '';
 				for(var i=0; i<revs.length; i++){
 					results += '<li><a href="/review?id='+revs[i].reviewid+'">';
-					results += '';
-					results += revs[i].username+' wrote a review on '+revs[i].date+'</a></li><br><br>';
+					results += revs[i].username+' wrote a review on '+revs[i].date;
+                    results += '</a></li><br><br>';
 				}
-				rec_list.innerHTML = results;
+				reclist.innerHTML = results;
 				
 				writerevbutton.onclick = function(){
-					console.log('Setting Link');
 					if(uname)
 						window.location.href = '/write-review?movieid='+movieid;
 					else
-						window.location.href = '/loginpage?m='+movieid;
+						window.location.href = '/loginpage?wr='+movieid;
 				};
 			}
 			else
@@ -70,20 +67,19 @@ function loadstuff(uname){
 	request.send('{}');
 }
 
-var userlink = document.getElementById('userlink');
 var tabbar_username = document.getElementById('tabbar_username');
-var logout = document.getElementById('logout');
+var userlink        = document.getElementById('userlink');
+var logout          = document.getElementById('logout');
 
 console.log('ready');
 function loadLogin () {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.readyState === XMLHttpRequest.DONE) {
-
             if (request.status === 200) {
             	userlink.href = '/users/'+this.responseText;
             	tabbar_username.innerHTML = this.responseText;
-            	logout.innerHTML = '<li> <a href="/logout">LOGOUT</a></li>';
+            	logout.innerHTML = '<li><a href="/logout">LOGOUT</a></li>';
             	loadstuff(this.responseText);
             } else {
                 userlink.href = '/loginpage?m='+movieid;
